@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Restaurante.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Menú</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<br />
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Platos</a>       
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Producto" asp-action="Index1">Postres</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Bebidas</a>
+    </li>
+   
+</ul>
+<h3>Platos</h3>
+<table class="table">
+    <thead title="Platos">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Precio $
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Tipo == "Alimentos")
+            {
+            <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            }
+        }
+    </tbody>
+</table>
+
+<h3>Postres</h3>
+<table class="table">
+    <thead title="Postres">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Precio $
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Tipo == "Postres")
+            {
+            <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            }
+        }
+    </tbody>
+</table>
+
+<h3>Bebidas</h3>
+<table class="table">
+    <thead title="Bebidas">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Precio $
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Tipo == "Bebidas")
+            {
+            <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            }
+
+        }
+@*     <td>
+        <a asp-action="Edit" asp-route-id="@item.Codigo">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.Codigo">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Codigo">Delete</a>
+    </td> *@
+    </tbody>
+  
+</table>
+

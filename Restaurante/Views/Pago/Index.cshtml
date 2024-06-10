@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Restaurante.Models.Pago>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Monto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Moneda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Metodo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalConDescuento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descuento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdClimaNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCotizacionNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdOrdenNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Moneda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Metodo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalConDescuento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descuento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdClimaNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCotizacionNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOrdenNavigation.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
