@@ -160,7 +160,13 @@ namespace Restaurante.Controllers
             return _context.Productos.Any(e => e.Codigo == id);
         }
 
-        public async Task<IActionResult> Index1()
+        public async Task<IActionResult> Postres()
+        {
+            var restauranteContext = _context.Productos.Include(p => p.IdSucursalNavigation);
+            return View(await restauranteContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> Bebidas()
         {
             var restauranteContext = _context.Productos.Include(p => p.IdSucursalNavigation);
             return View(await restauranteContext.ToListAsync());

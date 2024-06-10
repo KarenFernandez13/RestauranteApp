@@ -1,14 +1,23 @@
-﻿
-@model IEnumerable<Restaurante.Models.Producto>
+﻿@model IEnumerable<Restaurante.Models.Producto>
 
 @{
     ViewData["Title"] = "Index1";
 }
 
-
-<h3>Postres</h3>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Producto" asp-action="Index">Platos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " asp-controller="Producto" asp-action="Postres">Postres</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" asp-controller="Producto" asp-action="Bebidas">Bebidas</a>
+    </li>
+</ul>
+<h3>Bebidas</h3>
 <table class="table">
-    <thead title="Postres">
+    <thead title="Bebidas">
         <tr>
             <th>
                 Nombre
@@ -25,7 +34,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            if (item.Tipo == "Postres")
+            if (item.Tipo == "Bebidas")
             {
             <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
@@ -37,7 +46,7 @@
                     @Html.DisplayFor(modelItem => item.Precio)
             </td>
             }
-        }
+        }   
     </tbody>
-</table>
 
+</table>
