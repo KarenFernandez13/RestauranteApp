@@ -1,7 +1,5 @@
-﻿@model IEnumerable<Restaurante.Models.Producto>
-
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewData["Title"] = "Listas";
 }
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -29,7 +27,7 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Reseña" asp-action="Index">Reseñas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Listas" asp-action="Listas">Listas</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Listas" asp-action="Index">Listas</a>
                     </li>
                 </ul>
             </div>
@@ -37,57 +35,10 @@
     </nav>
 </header>
 
-<h1>Menú</h1>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="text-center">
+    <a href="@Url.Action("ListaOrdenes", "Orden")" class="btn btn-primary">Lista de ordenes</a>
+</div>
 <br />
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" asp-controller="Producto" asp-action="Index">Platos</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-controller="Producto" asp-action="Postres">Postres</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-controller="Producto" asp-action="Bebidas">Bebidas</a>
-    </li>
-   
-</ul>
-<h3>Platos</h3>
-<table class="table">
-    <thead title="Platos">
-        <tr>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Descripción
-            </th>
-            <th>
-                Precio $
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            if (item.Tipo == "Alimentos")
-            {
-            <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            }
-        }
-    </tbody>
-</table>
-
-
-
+<div class="text-center">
+    <a href="@Url.Action("ListaClientes", "Cliente")" class="btn btn-primary">Lista de clientes</a>
+</div>

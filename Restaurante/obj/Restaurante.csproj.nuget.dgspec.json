@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\Restaurante.csproj": {}
+    "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\Restaurante.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\Restaurante.csproj": {
+    "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\Restaurante.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\Restaurante.csproj",
+        "projectUniqueName": "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\Restaurante.csproj",
         "projectName": "Restaurante",
-        "projectPath": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\Restaurante.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\obj\\",
+        "projectPath": "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\Restaurante.csproj",
+        "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

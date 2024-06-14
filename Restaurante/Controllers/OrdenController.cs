@@ -19,11 +19,16 @@ namespace Restaurante.Controllers
         }
 
         // GET: Orden
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ListaOrdenes()
         {
             var restauranteContext = _context.Ordens.Include(o => o.IdReservaNavigation).Include(o => o.IdUsuarioNavigation);
             return View(await restauranteContext.ToListAsync());
         }
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
 
         // GET: Orden/Details/5
         public async Task<IActionResult> Details(int? id)

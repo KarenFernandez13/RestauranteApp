@@ -19,9 +19,13 @@ namespace Restaurante.Controllers
         }
 
         // GET: Cliente
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ListaClientes()
         {
             return View(await _context.Clientes.ToListAsync());
+        }
+        public async Task<IActionResult> Index()
+        {
+            return View();
         }
 
         // GET: Cliente/Details/5
