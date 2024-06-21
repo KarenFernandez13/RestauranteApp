@@ -48,7 +48,7 @@ namespace Restaurante.Controllers
         // GET: Usuario/Create
         public IActionResult Create()
         {
-            ViewData["IdRol"] = new SelectList(_context.Rols, "Id", "Id");
+            ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id");
             ViewData["IdSucursal"] = new SelectList(_context.Sucursals, "Id", "Id");
             return View();
         }
@@ -66,7 +66,7 @@ namespace Restaurante.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdRol"] = new SelectList(_context.Rols, "Id", "Id", usuario.IdRol);
+            ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id", usuario.IdRol);
             ViewData["IdSucursal"] = new SelectList(_context.Sucursals, "Id", "Id", usuario.IdSucursal);
             return View(usuario);
         }
@@ -84,7 +84,7 @@ namespace Restaurante.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdRol"] = new SelectList(_context.Rols, "Id", "Id", usuario.IdRol);
+            ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id", usuario.IdRol);
             ViewData["IdSucursal"] = new SelectList(_context.Sucursals, "Id", "Id", usuario.IdSucursal);
             return View(usuario);
         }
@@ -121,7 +121,7 @@ namespace Restaurante.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdRol"] = new SelectList(_context.Rols, "Id", "Id", usuario.IdRol);
+            ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id", usuario.IdRol);
             ViewData["IdSucursal"] = new SelectList(_context.Sucursals, "Id", "Id", usuario.IdSucursal);
             return View(usuario);
         }

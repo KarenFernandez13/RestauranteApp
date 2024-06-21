@@ -21,7 +21,7 @@ namespace Restaurante.Controllers
         // GET: Rol
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Rols.ToListAsync());
+            return View(await _context.Roles.ToListAsync());
         }
 
         // GET: Rol/Details/5
@@ -32,7 +32,7 @@ namespace Restaurante.Controllers
                 return NotFound();
             }
 
-            var rol = await _context.Rols
+            var rol = await _context.Roles
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (rol == null)
             {
@@ -53,7 +53,7 @@ namespace Restaurante.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre")] Rol rol)
+        public async Task<IActionResult> Create([Bind("Nombre")] Rol rol)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace Restaurante.Controllers
                 return NotFound();
             }
 
-            var rol = await _context.Rols.FindAsync(id);
+            var rol = await _context.Roles.FindAsync(id);
             if (rol == null)
             {
                 return NotFound();
@@ -123,7 +123,7 @@ namespace Restaurante.Controllers
                 return NotFound();
             }
 
-            var rol = await _context.Rols
+            var rol = await _context.Roles
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (rol == null)
             {
@@ -138,10 +138,10 @@ namespace Restaurante.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var rol = await _context.Rols.FindAsync(id);
+            var rol = await _context.Roles.FindAsync(id);
             if (rol != null)
             {
-                _context.Rols.Remove(rol);
+                _context.Roles.Remove(rol);
             }
 
             await _context.SaveChangesAsync();
@@ -150,7 +150,7 @@ namespace Restaurante.Controllers
 
         private bool RolExists(int id)
         {
-            return _context.Rols.Any(e => e.Id == id);
+            return _context.Roles.Any(e => e.Id == id);
         }
     }
 }

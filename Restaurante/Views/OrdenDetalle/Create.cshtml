@@ -1,4 +1,4 @@
-﻿@model Restaurante.Models.OrdenDetalle
+﻿@model Tuple<Restaurante.Models.OrdenDetalle, IEnumerable<Restaurante.Models.Producto>>
 
 @{
     ViewData["Title"] = "Create";
@@ -13,22 +13,64 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <label asp-for="Item1.IdOrden" class="control-label"></label>
+                <select asp-for="Item1.IdOrden" class="form-control" asp-items="ViewBag.IdOrdenNavigation"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
+                <label asp-for="Item1.Cantidad" class="control-label"></label>
+                <input asp-for="Item1.Cantidad" class="form-control" />
+                <span asp-validation-for="Item1.Cantidad" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdOrden" class="control-label"></label>
-                <select asp-for="IdOrden" class ="form-control" asp-items="ViewBag.IdOrden"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="CodigoProd" class="control-label"></label>
-                <select asp-for="CodigoProd" class ="form-control" asp-items="ViewBag.CodigoProd"></select>
+            <br />
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" asp-controller="Producto" asp-action="Index">Platos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Producto" asp-action="Postres">Postres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Producto" asp-action="Bebidas">Bebidas</a>
+                    </li>
+                </ul>
+                <br />
+                <h3>Platos</h3>
+                <table class="table">
+                    <thead title="Platos">
+                        <tr>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Descripción
+                            </th>
+                            <th>
+                                Precio $
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Item2)
+                        {
+                            if (item.Tipo == "Alimentos")
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Precio)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -42,5 +84,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

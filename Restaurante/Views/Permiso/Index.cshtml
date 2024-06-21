@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdRolNavigation)
+                @Html.DisplayNameFor(model => model.Roles)
             </th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdRolNavigation.Id)
+                @Html.DisplayFor(modelItem => item.Roles)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Numero">Edit</a> |

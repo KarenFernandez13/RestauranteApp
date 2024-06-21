@@ -51,7 +51,7 @@ namespace Restaurante.Controllers
         {
             ViewData["IdClima"] = new SelectList(_context.Climas, "Id", "Id");
             ViewData["IdCotizacion"] = new SelectList(_context.Cotizacions, "Id", "Id");
-            ViewData["IdOrden"] = new SelectList(_context.Ordens, "Id", "Id");
+            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id");
             return View();
         }
 
@@ -70,7 +70,7 @@ namespace Restaurante.Controllers
             }
             ViewData["IdClima"] = new SelectList(_context.Climas, "Id", "Id", pago.IdClima);
             ViewData["IdCotizacion"] = new SelectList(_context.Cotizacions, "Id", "Id", pago.IdCotizacion);
-            ViewData["IdOrden"] = new SelectList(_context.Ordens, "Id", "Id", pago.IdOrden);
+            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id", pago.IdOrden);
             return View(pago);
         }
 
@@ -89,7 +89,7 @@ namespace Restaurante.Controllers
             }
             ViewData["IdClima"] = new SelectList(_context.Climas, "Id", "Id", pago.IdClima);
             ViewData["IdCotizacion"] = new SelectList(_context.Cotizacions, "Id", "Id", pago.IdCotizacion);
-            ViewData["IdOrden"] = new SelectList(_context.Ordens, "Id", "Id", pago.IdOrden);
+            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id", pago.IdOrden);
             return View(pago);
         }
 
@@ -127,7 +127,7 @@ namespace Restaurante.Controllers
             }
             ViewData["IdClima"] = new SelectList(_context.Climas, "Id", "Id", pago.IdClima);
             ViewData["IdCotizacion"] = new SelectList(_context.Cotizacions, "Id", "Id", pago.IdCotizacion);
-            ViewData["IdOrden"] = new SelectList(_context.Ordens, "Id", "Id", pago.IdOrden);
+            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id", pago.IdOrden);
             return View(pago);
         }
 
