@@ -5,8 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<RestauranteContext>(options =>
-options.UseSqlServer("CadenaSQL"));
+builder.Services.AddDbContext<RestauranteContext>(options =>options.UseSqlServer("CadenaSQL"));
 
 var app = builder.Build();
 

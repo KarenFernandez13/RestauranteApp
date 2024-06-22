@@ -21,7 +21,7 @@ namespace Restaurante.Controllers
         // GET: Permiso
         public async Task<IActionResult> Index()
         {
-            var restauranteContext = _context.Permisos.Include(p => p.IdRolNavigation);
+            var restauranteContext = _context.Permisos.Include(p => p.Roles);
             return View(await restauranteContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace Restaurante.Controllers
             }
 
             var permiso = await _context.Permisos
-                .Include(p => p.IdRolNavigation)
+                .Include(p => p.Roles)
                 .FirstOrDefaultAsync(m => m.Numero == id);
             if (permiso == null)
             {
@@ -47,7 +47,7 @@ namespace Restaurante.Controllers
         // GET: Permiso/Create
         public IActionResult Create()
         {
-            ViewData["IdRol"] = new SelectList(_context.Rols, "Id", "Id");
+            ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace Restaurante.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdRol"] = new SelectList(_context.Rols, "Id", "Id", permiso.IdRol);
+            ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id", permiso.Roles);
             return View(permiso);
         }
 
@@ -81,7 +81,7 @@ namespace Restaurante.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdRol"] = new SelectList(_context.Rols, "Id", "Id", permiso.IdRol);
+            ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id", permiso.Roles);
             return View(permiso);
         }
 
@@ -117,7 +117,7 @@ namespace Restaurante.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdRol"] = new SelectList(_context.Rols, "Id", "Id", permiso.IdRol);
+            ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id", permiso.Roles);
             return View(permiso);
         }
 
@@ -130,7 +130,7 @@ namespace Restaurante.Controllers
             }
 
             var permiso = await _context.Permisos
-                .Include(p => p.IdRolNavigation)
+                .Include(p => p.Roles)
                 .FirstOrDefaultAsync(m => m.Numero == id);
             if (permiso == null)
             {

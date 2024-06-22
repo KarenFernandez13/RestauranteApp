@@ -3,10 +3,9 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Edit</h1>
-
-<h4>Orden</h4>
+<hr />
+<h3>Editar</h3>
+<h3>Orden</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -36,8 +35,9 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Orden")">Volver</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

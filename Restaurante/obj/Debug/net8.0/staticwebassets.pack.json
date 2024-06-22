@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Restaurante.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\css\\estiloLogin.css",
+      "PackagePath": "staticwebassets\\css\\estiloLogin.css"
+    },
+    {
       "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

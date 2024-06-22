@@ -171,5 +171,7 @@ namespace Restaurante.Controllers
             var restauranteContext = _context.Productos.Include(p => p.IdSucursalNavigation);
             return View(await restauranteContext.ToListAsync());
         }
+
+
     }
 }
