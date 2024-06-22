@@ -36,7 +36,16 @@ namespace Restaurante.Controllers
                                         .ToList();
             return View(ordenes);
         }
+        public IActionResult Index1()
+        {
+            var productos = _context.Productos.ToList();
 
+            // Simulación de obtención de orden detalle
+            var ordenDetalle = new OrdenDetalle(); // Reemplaza con la lógica real para obtener los detalles de la orden
+
+            var model = new Tuple<OrdenDetalle, IEnumerable<Producto>>(ordenDetalle, productos);
+            return View(model);
+        }
 
         // GET: Orden/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -78,14 +87,7 @@ namespace Restaurante.Controllers
                 IdReserva = idReserva,
                 Estado = "Activa",
                 OrdenDetalles = new List<OrdenDetalle>()
-            };
-
-            var viewModel = new OrdenVM
-            {
-                Orden = orden,
-                Productos = _context.Productos.ToList(),
-                OrdenDetalles = new List<OrdenDetalle>()
-            };
+            };         
 
             ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
             return View();
@@ -232,10 +234,7 @@ namespace Restaurante.Controllers
             _context.SaveChanges();
 
             return Json(new { success = true });
-        }
-
-
-     
+        }           
 
     }
 }
