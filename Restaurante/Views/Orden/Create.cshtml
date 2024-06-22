@@ -1,46 +1,37 @@
 ﻿@model Restaurante.Models.Orden
-
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Orden</h4>
+<hr />
+<h3>Nueva</h3>
+<h3>Orden</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" />
-                <span asp-validation-for="Total" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdUsuario" class="control-label"></label>
-                <select asp-for="IdUsuario" class ="form-control" asp-items="ViewBag.IdUsuario"></select>
-            </div>
-            <div class="form-group">
+            <div>
                 <label asp-for="IdReserva" class="control-label"></label>
-                <select asp-for="IdReserva" class ="form-control" asp-items="ViewBag.IdReserva"></select>
+                <input asp-for="IdReserva" class="form-control" readonly />
+                <span asp-validation-for="IdReserva" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="IdUsuario" />
+         @*    <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <input asp-for="Estado" class="form-control" readonly />
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div> *@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
+<hr />
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Orden")">Volver</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Restaurante.Models;
-
 namespace Restaurante.Controllers
 {
     public class OrdenController : Controller
@@ -21,12 +20,21 @@ namespace Restaurante.Controllers
         // GET: Orden
         public async Task<IActionResult> ListaOrdenes()
         {
-            var restauranteContext = _context.Ordens.Include(o => o.IdReservaNavigation).Include(o => o.IdUsuarioNavigation);
+            var restauranteContext = _context.Orden.Include(o => o.IdReservaNavigation).Include(o => o.IdUsuarioNavigation);
             return View(await restauranteContext.ToListAsync());
         }
+
         public async Task<IActionResult> Index()
         {
-            return View();
+            var today = DateOnly.FromDateTime(DateTime.Today);
+            var ordenes = _context.Orden
+                                    .Include(o => o.IdReservaNavigation)
+                                    .ThenInclude(r => r.IdMesaNavigation)
+                                    .Include(o => o.IdReservaNavigation)
+                                    .ThenInclude(r => r.CiClienteNavigation)
+                                     .Where(o => o.IdReservaNavigation.Fecha == today)
+                                        .ToList();
+            return View(ordenes);
         }
 
 
@@ -35,13 +43,17 @@ namespace Restaurante.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            var orden = await _context.Ordens
-                .Include(o => o.IdReservaNavigation)
-                .Include(o => o.IdUsuarioNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            // Usar FirstOrDefaultAsync para la consulta asincrónica
+            var orden = await _context.Orden
+                .Include(o => o.IdReservaNavigation) // Incluye la navegación de Reserva si es necesario
+                .Include(o => o.IdUsuarioNavigation) // Incluye la navegación de Usuario si es necesario
+                .Include(o => o.OrdenDetalles) // Incluye los detalles de la orden si es necesario
+                .Include(o => o.Pagos) // Incluye los pagos si es necesario
+                .FirstOrDefaultAsync(o => o.Id == id);
+
             if (orden == null)
             {
                 return NotFound();
@@ -49,21 +61,41 @@ namespace Restaurante.Controllers
 
             return View(orden);
         }
+    
 
         // GET: Orden/Create
-        public IActionResult Create()
+        public IActionResult Create(int idReserva)
         {
-            ViewData["IdReserva"] = new SelectList(_context.Reservas, "Id", "Id");
+
+            var reserva = _context.Reservas.Find(idReserva);
+            if (reserva == null)
+            {
+                return NotFound();
+            }
+
+            var orden = new Orden
+            {
+                IdReserva = idReserva,
+                Estado = "Activa",
+                OrdenDetalles = new List<OrdenDetalle>()
+            };
+
+            var viewModel = new OrdenVM
+            {
+                Orden = orden,
+                Productos = _context.Productos.ToList(),
+                OrdenDetalles = new List<OrdenDetalle>()
+            };
+
             ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
             return View();
+
         }
 
-        // POST: Orden/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Total,IdUsuario,IdReserva")] Orden orden)
+        public async Task<IActionResult> Create([Bind("Total,Estado,IdUsuario,IdReserva")] Orden orden)
         {
             if (ModelState.IsValid)
             {
@@ -71,10 +103,12 @@ namespace Restaurante.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdReserva"] = new SelectList(_context.Reservas, "Id", "Id", orden.IdReserva);
             ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id", orden.IdUsuario);
+            ViewData["Productos"] = new SelectList(_context.Productos, "Id", "Nombre");
+
             return View(orden);
         }
+
 
         // GET: Orden/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -84,7 +118,7 @@ namespace Restaurante.Controllers
                 return NotFound();
             }
 
-            var orden = await _context.Ordens.FindAsync(id);
+            var orden = await _context.Orden.FindAsync(id);
             if (orden == null)
             {
                 return NotFound();
@@ -99,7 +133,7 @@ namespace Restaurante.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Total,IdUsuario,IdReserva")] Orden orden)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Total,Estado,IdUsuario,IdReserva")] Orden orden)
         {
             if (id != orden.Id)
             {
@@ -139,7 +173,7 @@ namespace Restaurante.Controllers
                 return NotFound();
             }
 
-            var orden = await _context.Ordens
+            var orden = await _context.Orden
                 .Include(o => o.IdReservaNavigation)
                 .Include(o => o.IdUsuarioNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -156,10 +190,10 @@ namespace Restaurante.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var orden = await _context.Ordens.FindAsync(id);
+            var orden = await _context.Orden.FindAsync(id);
             if (orden != null)
             {
-                _context.Ordens.Remove(orden);
+                _context.Orden.Remove(orden);
             }
 
             await _context.SaveChangesAsync();
@@ -168,7 +202,41 @@ namespace Restaurante.Controllers
 
         private bool OrdenExists(int id)
         {
-            return _context.Ordens.Any(e => e.Id == id);
+            return _context.Orden.Any(e => e.Id == id);
         }
+
+
+        public async Task<IActionResult> CheckOrder(int idReserva)
+        {
+            var ordenExistente = await _context.Orden.FirstOrDefaultAsync(o => o.IdReserva == idReserva);
+
+            if (ordenExistente == null)
+            {
+                return RedirectToAction("Create", new { IdReserva = idReserva });
+            }
+
+            return RedirectToAction("Details", new { id = ordenExistente.Id });
+        }
+
+
+        [HttpPost]
+        public IActionResult UpdateStatus(int id, string estado)
+        {
+            var orden = _context.Orden.Find(id);
+            if (orden == null)
+            {
+                return NotFound();
+            }
+
+            orden.Estado = estado;
+            _context.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
+
+     
+
     }
 }
+

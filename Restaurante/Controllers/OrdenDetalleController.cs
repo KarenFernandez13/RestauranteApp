@@ -46,11 +46,17 @@ namespace Restaurante.Controllers
         }
 
         // GET: OrdenDetalle/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["CodigoProd"] = new SelectList(_context.Productos, "Codigo", "Codigo");
-            ViewData["IdOrden"] = new SelectList(_context.Ordens, "Id", "Id");
-            return View();
+            var productos = await _context.Productos.ToListAsync();
+            var ordenDetalle = new OrdenDetalle();
+            var model = new Tuple<OrdenDetalle, IEnumerable<Producto>>(ordenDetalle, productos);
+
+            // Ajusta esto según tu modelo Orden
+            ViewBag.IdOrden = new SelectList(await _context.Orden.ToListAsync(), "Id", "Nombre");
+
+            return View(model);
+
         }
 
         // POST: OrdenDetalle/Create
@@ -67,7 +73,7 @@ namespace Restaurante.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CodigoProd"] = new SelectList(_context.Productos, "Codigo", "Codigo", ordenDetalle.CodigoProd);
-            ViewData["IdOrden"] = new SelectList(_context.Ordens, "Id", "Id", ordenDetalle.IdOrden);
+            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id", ordenDetalle.IdOrden);
             return View(ordenDetalle);
         }
 
@@ -85,7 +91,7 @@ namespace Restaurante.Controllers
                 return NotFound();
             }
             ViewData["CodigoProd"] = new SelectList(_context.Productos, "Codigo", "Codigo", ordenDetalle.CodigoProd);
-            ViewData["IdOrden"] = new SelectList(_context.Ordens, "Id", "Id", ordenDetalle.IdOrden);
+            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id", ordenDetalle.IdOrden);
             return View(ordenDetalle);
         }
 
@@ -122,7 +128,7 @@ namespace Restaurante.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CodigoProd"] = new SelectList(_context.Productos, "Codigo", "Codigo", ordenDetalle.CodigoProd);
-            ViewData["IdOrden"] = new SelectList(_context.Ordens, "Id", "Id", ordenDetalle.IdOrden);
+            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id", ordenDetalle.IdOrden);
             return View(ordenDetalle);
         }
 
@@ -164,6 +170,12 @@ namespace Restaurante.Controllers
         private bool OrdenDetalleExists(int id)
         {
             return _context.OrdenDetalles.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> OrdenDetalle()
+        {
+            var productos = await _context.Productos.ToListAsync();
+            return View(productos);
         }
     }
 }

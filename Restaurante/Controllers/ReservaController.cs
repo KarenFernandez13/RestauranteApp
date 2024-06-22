@@ -19,11 +19,46 @@ namespace Restaurante.Controllers
         }
 
         // GET: Reserva
-        public async Task<IActionResult> Index()
+
+        public IActionResult Index(DateTime? startDate, DateTime? endDate)
+        {
+            var reservas = _context.Reservas
+                           .Include(r => r.IdMesaNavigation)
+                           .Include(r => r.CiClienteNavigation)
+                           .AsQueryable();
+
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                var start = DateOnly.FromDateTime(startDate.Value);
+                var end = DateOnly.FromDateTime(endDate.Value);
+                reservas = reservas.Where(r => r.Fecha >= start && r.Fecha <= end);
+            }
+            else if (startDate.HasValue)
+            {
+                var start = DateOnly.FromDateTime(startDate.Value);
+                reservas = reservas.Where(r => r.Fecha >= start);
+            }
+            else if (endDate.HasValue)
+            {
+                var end = DateOnly.FromDateTime(endDate.Value);
+                reservas = reservas.Where(r => r.Fecha <= end);
+            }
+            else 
+            {
+                var today = DateOnly.FromDateTime(DateTime.Today);
+                reservas = reservas.Where(r => r.Fecha >= today);               
+            }
+            reservas = reservas.OrderBy(r => r.Fecha);
+            return View(reservas.ToList());
+        }
+
+
+        public async Task<IActionResult> ListaReservas()
         {
             var restauranteContext = _context.Reservas.Include(r => r.CiClienteNavigation).Include(r => r.IdMesaNavigation);
             return View(await restauranteContext.ToListAsync());
         }
+
 
         // GET: Reserva/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -58,7 +93,7 @@ namespace Restaurante.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CiCliente,IdMesa,Fecha,Estado,Hora")] Reserva reserva)
+        public async Task<IActionResult> Create([Bind("CiCliente,Fecha,Hora,IdMesa,Estado")] Reserva reserva)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +129,7 @@ namespace Restaurante.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CiCliente,IdMesa,Fecha,Estado,Hora")] Reserva reserva)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CiCliente,Fecha,Hora,IdMesa,Estado")] Reserva reserva)
         {
             if (id != reserva.Id)
             {
@@ -123,7 +158,7 @@ namespace Restaurante.Controllers
             }
             ViewData["CiCliente"] = new SelectList(_context.Clientes, "Ci", "Ci", reserva.CiCliente);
             ViewData["IdMesa"] = new SelectList(_context.Mesas, "Id", "Id", reserva.IdMesa);
-            return View(reserva);
+            return View();
         }
 
         // GET: Reserva/Delete/5
@@ -165,5 +200,24 @@ namespace Restaurante.Controllers
         {
             return _context.Reservas.Any(e => e.Id == id);
         }
+
+        
+        [HttpPost]
+        public IActionResult UpdateStatus(int id, string estado)
+        {
+            var reserva = _context.Reservas.Find(id);
+            if (reserva == null)
+            {
+                return NotFound();
+            }
+
+            reserva.Estado = estado;
+            _context.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
+
+       
     }
 }

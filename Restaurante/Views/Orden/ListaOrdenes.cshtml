@@ -3,40 +3,51 @@
 @{
     ViewData["Title"] = "Lista de ordenes";
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdReservaNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Id Reserva</th>
+                <th>Id Mesa</th>
+                <th>Total</th>
+                <th>Estado</th> 
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdReservaNavigation.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdReservaNavigation.IdMesa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Id)</td>
                     <td>
-                    @Html.DisplayFor(modelItem => item.Total)
+                        <button class="btn btn-link change-status-btn" data-id="@item.Id">Cambiar Estado</button>
+                        <select class="form-control status-select" data-id="@item.Id" style="display: none;">
+                            <option value="Activa">Activa</option>
+                            <option value="Cerrada">Cerrada</option>                            
+                        </select>
                     </td>
                     <td>
-                    @Html.DisplayFor(modelItem => item.IdReservaNavigation.Id)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Id)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Opciones
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.Id })">Editar</a>
+                                <a class="dropdown-item" href="@Url.Action("Details", new { id = item.Id })">Ver Detalles</a>
+                                <a class="dropdown-item" href="@Url.Action("Delete", new { id = item.Id })">Eliminar</a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
+}
