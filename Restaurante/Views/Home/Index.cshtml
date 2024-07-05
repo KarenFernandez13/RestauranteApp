@@ -2,16 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">-- AL MAL TIEMPO BUENA CARA --</h1><br />
-    <p>Restaurante temático - Descuentos especiales</a>.</p>
-    <br />
+<div class="image-container">
+    <img src="~/Img/logo2.png" alt="Logo" />
 </div>
-<div class="text-center">
-    <a href="@Url.Action("Index", "Producto")" class="btn btn-primary">Ver menú</a>
+<div class="button-container text-center">
+    <a href="@Url.Action("Index", "Producto")" class="btn custom-btn">Ver menú</a>
+    <a href="@Url.Action("Index", "Reseñas")" class="btn custom-btn">Reseñas</a>
 </div>
-<br />
-<div class="text-center">
-    <a href="@Url.Action("Login", "Acceso")" class="btn btn-primary">Login usuarios</a>
-</div>
+
+<footer>
+    <div class="small-image-container">
+        <a href="@Url.Action("Login", "Acceso")">
+            <img src="~/img/monstera.png" alt="Link usuarios" />
+        </a>
+    </div>
+</footer>
 

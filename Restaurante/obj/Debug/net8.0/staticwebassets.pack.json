@@ -5,6 +5,34 @@
       "PackagePath": "staticwebassets\\Restaurante.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\Img\\fondo4.jpg",
+      "PackagePath": "staticwebassets\\Img\\fondo4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\Img\\fondo5.jpg",
+      "PackagePath": "staticwebassets\\Img\\fondo5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\Img\\fondoMenu.jpg",
+      "PackagePath": "staticwebassets\\Img\\fondoMenu.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\Img\\icono.png",
+      "PackagePath": "staticwebassets\\Img\\icono.png"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\Img\\logo2.png",
+      "PackagePath": "staticwebassets\\Img\\logo2.png"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\Img\\logo3.png",
+      "PackagePath": "staticwebassets\\Img\\logo3.png"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\Img\\monstera.png",
+      "PackagePath": "staticwebassets\\Img\\monstera.png"
+    },
+    {
       "Id": "C:\\Users\\Usuario\\source\\repos\\Restaurante1\\Restaurante\\wwwroot\\css\\estiloLogin.css",
       "PackagePath": "staticwebassets\\css\\estiloLogin.css"
     },

@@ -36,16 +36,7 @@ namespace Restaurante.Controllers
                                         .ToList();
             return View(ordenes);
         }
-        public IActionResult Index1()
-        {
-            var productos = _context.Productos.ToList();
-
-            // Simulación de obtención de orden detalle
-            var ordenDetalle = new OrdenDetalle(); // Reemplaza con la lógica real para obtener los detalles de la orden
-
-            var model = new Tuple<OrdenDetalle, IEnumerable<Producto>>(ordenDetalle, productos);
-            return View(model);
-        }
+        
 
         // GET: Orden/Details/5
         public async Task<IActionResult> Details(int? id)

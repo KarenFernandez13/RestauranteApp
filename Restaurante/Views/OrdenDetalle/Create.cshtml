@@ -1,4 +1,4 @@
-﻿@model Tuple<Restaurante.Models.OrdenDetalle, IEnumerable<Restaurante.Models.Producto>>
+﻿@model Restaurante.Models.OrdenDetalle
 
 @{
     ViewData["Title"] = "Create";
@@ -8,13 +8,38 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Item1.IdOrden" class="control-label"></label>
-                <select asp-for="Item1.IdOrden" class="form-control" asp-items="ViewBag.IdOrdenNavigation"></select>
-            </div>       
-            <br />            
+                <label asp-for="IdOrden" class="control-label"></label>
+                <input type="hidden" asp-for="IdOrden" />
+                <input type="text" class="form-control" asp-for="IdOrden" readonly />
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="tipoProducto" class="control-label">Tipo de Producto</label>
+                <select class="form-control" id="tipoProducto" name="tipoProducto">
+                    <option value="">Selecciona un tipo de producto</option>
+                    @foreach (var tipo in ViewBag.TiposProductos)
+                    {
+                        <option value="@tipo.Value">@tipo.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodigoProd" class="control-label"></label>
+                <select asp-for="CodigoProd" class="form-control" id="CodigoProd" name="CodigoProd">
+                    <option value="">Selecciona un producto</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="button" value="Agregar Producto" class="btn btn-secondary" id="addProduct" />
+            </div>
+            <div id="productList"></div>
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
@@ -22,70 +47,42 @@
     </div>
 </div>
 <hr />
+
 <div>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" asp-controller="Producto" asp-action="Index">Platos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" asp-controller="Producto" asp-action="Postres">Postres</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" asp-controller="Producto" asp-action="Bebidas">Bebidas</a>
-        </li>
-    </ul>
-    <br />
-    <h3>Platos</h3>
-    <table class="table">
-        <thead title="Platos">
-            <tr>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Descripción
-                </th>
-                <th>
-                    Precio $
-                </th>
-                <th>
-                    Cantidad
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Item2)
-            {
-                if (item.Tipo == "Alimentos")
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Descripcion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Precio)
-                        </td>
-                        <td>
-                            <div class="form-group">                                
-                                <input asp-for="Item1.Cantidad" class="form-control" />
-                                <span asp-validation-for="Item1.Cantidad" class="text-danger"></span>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
-</div>
-<div>
-    <a asp-action="Index">Volver</a>
+    <a asp-action="Details" asp-route-id="@ViewBag.IdOrden">Ver Detalles de la Orden</a>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tipoProducto').change(function () {
+                var tipo = $(this).val();
+                var productosSelect = $('#CodigoProd');
+                productosSelect.empty();
+                productosSelect.append('<option value="">Selecciona un producto</option>');
+
+                if (tipo) {
+                    $.ajax({
+                        url: '@Url.Action("GetProductosByTipo")',
+                        data: { tipo: tipo },
+                        success: function (data) {
+                            $.each(data, function (i, producto) {
+                                productosSelect.append('<option value="' + producto.codigo + '">' + producto.nombre + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#addProduct').click(function () {
+                var productoSeleccionado = $('#CodigoProd').val();
+                var cantidad = $('input[name="Cantidad"]').val();
+                if (productoSeleccionado && cantidad) {
+                    $('#productList').append('<input type="hidden" name="productos[]" value="' + productoSeleccionado + ':' + cantidad + '" />');
+                    $('#productList').append('<div>' + $('#CodigoProd option:selected').text() + ' - ' + cantidad + ' unidades</div>');
+                }
+            });
+        });
+    </script>
 }
