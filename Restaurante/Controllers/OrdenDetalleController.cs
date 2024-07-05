@@ -25,56 +25,94 @@ namespace Restaurante.Controllers
             return View(await restauranteContext.ToListAsync());
         }
 
+
         // GET: OrdenDetalle/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            var orden = await _context.Orden
+            .Include(o => o.OrdenDetalles)
+                .ThenInclude(od => od.CodigoProdNavigation)
+            .Include(o => o.IdReservaNavigation)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (orden == null)
             {
                 return NotFound();
             }
 
-            var ordenDetalle = await _context.OrdenDetalles
-                .Include(o => o.CodigoProdNavigation)
-                .Include(o => o.IdOrdenNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ordenDetalle == null)
-            {
-                return NotFound();
-            }
-
-            return View(ordenDetalle);
+            return View(orden);
         }
+
 
         // GET: OrdenDetalle/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create(int idOrden)
         {
-            var productos = await _context.Productos.ToListAsync();
-            var ordenDetalle = new OrdenDetalle();
-            var model = new Tuple<OrdenDetalle, IEnumerable<Producto>>(ordenDetalle, productos);
+            var tiposProductos = _context.Productos
+                .Select(p => p.Tipo)
+                .Distinct()
+                .ToList();
 
-            // Ajusta esto según tu modelo Orden
-            ViewBag.IdOrden = new SelectList(await _context.Orden.ToListAsync(), "Id", "Nombre");
+            ViewBag.TiposProductos = tiposProductos.Select(t => new SelectListItem { Value = t, Text = t }).ToList();
+            ViewBag.IdOrden = idOrden;
 
-            return View(model);
-
+            return View(new OrdenDetalle { IdOrden = idOrden });
         }
 
-        // POST: OrdenDetalle/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        // POST: OrdenDetalle/Create       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Cantidad,IdOrden,CodigoProd")] OrdenDetalle ordenDetalle)
+        public async Task<IActionResult> Create(int idOrden, string tipoProducto, string[] productos)
         {
-            if (ModelState.IsValid)
+            if (productos != null && productos.Length > 0)
             {
-                _context.Add(ordenDetalle);
+                var orden = await _context.Orden.Include(o => o.OrdenDetalles)
+                                                  .FirstOrDefaultAsync(o => o.Id == idOrden);
+                if (orden == null)
+                {
+                    return NotFound();
+                }
+
+                foreach (var prod in productos)
+                {
+                    var partes = prod.Split(':');
+                    if (partes.Length == 2 && int.TryParse(partes[0], out int codigoProd) && int.TryParse(partes[1], out int cantidad))
+                    {
+                        var ordenDetalle = new OrdenDetalle
+                        {
+                            IdOrden = idOrden,
+                            CodigoProd = codigoProd,
+                            Cantidad = cantidad
+                        };
+                        orden.OrdenDetalles.Add(ordenDetalle);
+                        _context.Add(ordenDetalle);
+                    }
+                }
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = idOrden });
             }
-            ViewData["CodigoProd"] = new SelectList(_context.Productos, "Codigo", "Codigo", ordenDetalle.CodigoProd);
-            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id", ordenDetalle.IdOrden);
-            return View(ordenDetalle);
+
+            var tiposProductos = _context.Productos
+                .Select(p => p.Tipo)
+                .Distinct()
+                .ToList();
+
+            ViewBag.TiposProductos = tiposProductos.Select(t => new SelectListItem { Value = t, Text = t }).ToList();
+            ViewBag.IdOrden = idOrden;
+            ViewBag.Productos = _context.Productos
+                .Where(p => p.Tipo == tipoProducto)
+                .Select(p => new { p.Codigo, p.Nombre })
+                .ToList();
+
+            return View(new OrdenDetalle { IdOrden = idOrden });
+        }
+
+        [HttpGet]
+        public JsonResult GetProductosByTipo(string tipo)
+        {
+            var productos = _context.Productos.Where(p => p.Tipo == tipo).Select(p => new { Codigo = p.Codigo, Nombre = p.Nombre }).ToList();
+
+            return Json(productos);
         }
 
         // GET: OrdenDetalle/Edit/5

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Restaurante.Models;
 
@@ -13,6 +14,7 @@ public partial class Producto
 
     public double Precio { get; set; }
 
+    [RegularExpression(@"^(Entradas|Platos|Ensaladas|Bebidas|Postres)$", ErrorMessage = "Debe seleccionar una categoría")]
     public string Tipo { get; set; } = null!;
 
     public int? IdSucursal { get; set; }

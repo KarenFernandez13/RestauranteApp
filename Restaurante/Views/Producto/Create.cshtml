@@ -34,7 +34,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Tipo" class="control-label"></label>
-                <input asp-for="Tipo" class="form-control" />
+                <<select asp-for="Tipo" class="form-control">
+                    <option value="">Seleccione un tipo </option>
+                    <option value="Entradas">Entradas</option>
+                    <option value="Platos">Platos</option>
+                    <option value="Ensaladas">Ensaladas</option>
+                    <option value="Postres">Postres</option>
+                    <option value="Bebidas">Bebidas</option>
+                </select>
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
             <div class="form-group">

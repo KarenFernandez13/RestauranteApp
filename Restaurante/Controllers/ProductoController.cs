@@ -25,6 +25,7 @@ namespace Restaurante.Controllers
             return View(await restauranteContext.ToListAsync());
         }
 
+       
         // GET: Producto/Details/5
         public async Task<IActionResult> Details(int? id)
         {

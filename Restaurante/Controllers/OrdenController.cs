@@ -36,7 +36,7 @@ namespace Restaurante.Controllers
                                         .ToList();
             return View(ordenes);
         }
-
+        
 
         // GET: Orden/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -78,14 +78,7 @@ namespace Restaurante.Controllers
                 IdReserva = idReserva,
                 Estado = "Activa",
                 OrdenDetalles = new List<OrdenDetalle>()
-            };
-
-            var viewModel = new OrdenVM
-            {
-                Orden = orden,
-                Productos = _context.Productos.ToList(),
-                OrdenDetalles = new List<OrdenDetalle>()
-            };
+            };         
 
             ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
             return View();
@@ -232,10 +225,7 @@ namespace Restaurante.Controllers
             _context.SaveChanges();
 
             return Json(new { success = true });
-        }
-
-
-     
+        }           
 
     }
 }

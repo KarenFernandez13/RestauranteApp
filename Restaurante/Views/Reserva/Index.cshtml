@@ -10,16 +10,33 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
-<hr/>
-    <h4>Reservas</h4>
-<hr />
-<p>
-    <a class="btn btn-primary" href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
-</p>
-<hr />
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+
+<br />
+<h3 class="bold-text">Reservas</h3>
+<br/>
+<div button-container>
+    <a class="custom-btn" href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
+</div>
+<br />
+<br />
 <div>
-    <h4>Buscar por fecha</h4>
+    <h5>Buscar por fecha</h5>
     <form method="get" action="@Url.Action("Index", "Reserva")" class="form-inline">
         <div class="form-group">
             <label for="startDate">Desde:  </label>
@@ -29,10 +46,10 @@
             <label for="endDate">Hasta:  </label>
             <input type="date" name="endDate" class="form-control" />
         </div>
-        <button type="submit" class="btn btn-primary">Buscar</button>
+        <button type="submit" class="custom-btn">Buscar</button>
     </form>
 </div>
-
+<br />
 @if (Model != null && Model.Any())
 {
     <table class="table">
@@ -67,7 +84,7 @@
                     </td>
                     <td>
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            <button class="custom-btn dropdown-toggle" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Opciones
                             </button>
@@ -79,7 +96,7 @@
                         </div>
                     </td>
                     <td>
-                        <button onclick="location.href='@Url.Action("CheckOrder", "Orden", new { idReserva = item.Id })'">O</button>
+                        <button class="custom-btn" onclick="location.href='@Url.Action("CheckOrder", "Orden", new { idReserva = item.Id })'">O</button>
                     </td>
                 </tr>
             }
@@ -122,5 +139,5 @@
     </script>   
 }
 <div>
-    <a class="btn btn-primary" href="@Url.Action("Index", "Producto")">Volver</a>
+    <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
 </div>
