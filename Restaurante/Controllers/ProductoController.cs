@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Restaurante.Models;
 
+
 namespace Restaurante.Controllers
 {
+  
     public class ProductoController : Controller
     {
         private readonly RestauranteContext _context;
@@ -44,6 +47,8 @@ namespace Restaurante.Controllers
             return View(producto);
         }
 
+
+        
         // GET: Producto/Create
         public IActionResult Create()
         {

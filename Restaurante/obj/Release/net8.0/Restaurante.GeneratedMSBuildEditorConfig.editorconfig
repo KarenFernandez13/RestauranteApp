@@ -282,10 +282,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZcOxYVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/usuario/OneDrive/Escritorio/prog III/obligatorio/sistema/RestauranteApp/Restaurante/Views/Reseña/LoginCliente.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZcOxYVxMb2dpbkNsaWVudGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/usuario/OneDrive/Escritorio/prog III/obligatorio/sistema/RestauranteApp/Restaurante/Views/Rol/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -336,10 +332,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/usuario/OneDrive/Escritorio/prog III/obligatorio/sistema/RestauranteApp/Restaurante/Views/Usuario/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/usuario/OneDrive/Escritorio/prog III/obligatorio/sistema/RestauranteApp/Restaurante/Views/Usuario/CreateCliente.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGVDbGllbnRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/usuario/OneDrive/Escritorio/prog III/obligatorio/sistema/RestauranteApp/Restaurante/Views/Usuario/Delete.cshtml]

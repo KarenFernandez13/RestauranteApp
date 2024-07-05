@@ -1,17 +1,37 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="text-center">
+
+   
     <h1 class="display-4">-- AL MAL TIEMPO BUENA CARA --</h1><br />
     <p>Restaurante temático - Descuentos especiales</a>.</p>
     <br />
 </div>
 <div class="text-center">
-    <a href="@Url.Action("Index", "Producto")" class="btn btn-primary">Ver menú</a>
+    <a href="@Url.Action("Index", "Producto")" class="btn btn-primary">Menú</a>
 </div>
 <br />
+
 <div class="text-center">
-    <a href="@Url.Action("Login", "Acceso")" class="btn btn-primary">Login usuarios</a>
+    <a href="@Url.Action("Index", "Reseña")" class="btn btn-primary">Reseñas</a>
 </div>
+<br />
+
+@if (!User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+    <div class="text-center">
+        <a href="@Url.Action("Login", "Acceso")" class="btn btn-primary">LogIn</a>
+    </div>
+}else
+{
+    <div class="text-center">
+        <a href="@Url.Action("Salir", "Home")" class="btn btn-primary">LogOut</a>
+    </div>
+}
+
+
 

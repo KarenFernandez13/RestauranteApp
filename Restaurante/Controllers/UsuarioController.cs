@@ -71,6 +71,49 @@ namespace Restaurante.Controllers
             return View(usuario);
         }
 
+
+
+
+        public IActionResult CreateCliente()
+        {
+            //ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id");
+            //ViewData["IdSucursal"] = new SelectList(_context.Sucursals, "Id", "Id");
+            return View();
+        }
+
+        // POST: Usuario/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCliente([Bind("Id,Nombre,Contraseña,Email")] Usuario usuario)
+        {
+            var listaClientes = await _context.Usuarios.FindAsync(usuario.Id);
+            if (listaClientes == null)
+            {
+                if (ModelState.IsValid)
+                {
+                    usuario.IdRol = 4;
+                    usuario.IdSucursal = 1;
+                    _context.Add(usuario);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Login", "Acceso");
+                }
+            }
+            else 
+            {
+                TempData["Mensaje"] = "Cliente registrado";
+                return View();
+            }
+          
+            //ViewData["IdRol"] = new SelectList(_context.Roles, "Id", "Id", usuario.IdRol);
+            //ViewData["IdSucursal"] = new SelectList(_context.Sucursals, "Id", "Id", usuario.IdSucursal);
+            return View(usuario);
+        }
+
+
+
+
+
+
         // GET: Usuario/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

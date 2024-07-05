@@ -1,14 +1,40 @@
 ﻿@model IEnumerable<Restaurante.Models.Reseña>
-
+@using System.Security.Claims
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Reseñas</h1>
+@if (User.Identity!.IsAuthenticated)
+{
+    <header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Restaurante</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">                    
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Salir">Salir</a>
+                    </li>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+}
+
+<div class="text-center">
+    <a href="@Url.Action("LoginCliente", "Reseña")" class="btn btn-primary">
+Crear nueva reseña    </a>
+</div>
+
+
 <table class="table">
     <thead>
         <tr>

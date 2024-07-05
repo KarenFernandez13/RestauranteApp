@@ -10,7 +10,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
 <hr />
 <h4>Reservas</h4>
 <hr />
@@ -124,3 +125,4 @@
 <div>
     <a class="btn btn-primary" href="@Url.Action("Index", "Producto")">Volver</a>
 </div>
+}

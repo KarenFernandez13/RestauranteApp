@@ -4,57 +4,93 @@ using Restaurante.Models;
 using Microsoft.AspNetCore.Http;
 using System.Data;
 using Newtonsoft.Json;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
+// para poder guardar la sesion
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 
 namespace Restaurante.Controllers
 {
-     public class AccesoController : Controller
+    public class AccesoController : Controller
     {
-        private string CadenaSQL = "Data Source=LAPTOP-CCI9Q8VH ;Initial Catalog= restaurante;Integrated Security=True; TrustServerCertificate=True";
+        private readonly RestauranteContext _context;
 
-        
+        public AccesoController(RestauranteContext context)
+        {
+            _context = context;
+        }
+
         public ActionResult Login()
         {
+            if (User.Identity!.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Producto");
+            }
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(Usuario usuario)
+        public async Task<IActionResult> Login(Usuario usuario)
         {
-            using (SqlConnection cn = new SqlConnection(CadenaSQL))
-            {
-                SqlCommand cmd = new SqlCommand("ValidarUsuario", cn);
-                cmd.CommandType = CommandType.StoredProcedure;
+              var usuario_Encontrado = await _context.Usuarios
+               .Include(u => u.IdRolNavigation)
+              .ThenInclude(r => r.Permisos)
+                .Where(u => u.Id == usuario.Id && u.Contraseña == usuario.Contraseña)
+               .FirstOrDefaultAsync();
+        
 
-                cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
-                cmd.Parameters.AddWithValue("@contraseña", usuario.Contraseña);
-                
-
-                cn.Open();
-
-                var result = cmd.ExecuteScalar();
-                if (result != null)
-                {
-                    usuario.Id = Convert.ToInt32(result);
-                }
-                else
-                {
-                    usuario.Id = 0;
-                }
-
-
-            }
-
-            if (usuario.Id != 0)
-            {
-                return RedirectToAction("Index", "Producto");
-
-            } else
+            if (usuario_Encontrado == null)
             {
                 TempData["Mensaje"] = "Usuario no encontrado";
                 return View();
             }
-            
+
+            var permisos = usuario_Encontrado.IdRolNavigation.Permisos.ToList();
+
+            List<Claim> claims = new List<Claim>
+               {
+                   new Claim(ClaimTypes.NameIdentifier, usuario_Encontrado.Id.ToString()),
+                    new Claim(ClaimTypes.Name, usuario_Encontrado.Nombre),
+                    new Claim(ClaimTypes.Role, usuario_Encontrado.IdRol.ToString())
+                };
+
+
+            foreach (Permiso p in permisos)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, p.Descripcion));
+
+                if (!string.IsNullOrEmpty(p.Numero.ToString()))
+                {
+                    claims.Add(new Claim("Permission", p.Descripcion));
+                }
+            }
+
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            AuthenticationProperties properties = new AuthenticationProperties
+            {
+                AllowRefresh = true,
+                IsPersistent = true // Mantener la sesión iniciada entre reinicios del navegador
+            };
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                properties
+            );
+
+            if (usuario_Encontrado.IdRol == 4)
+            {
+                return RedirectToAction("Create", "Reseña");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Producto");
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Restaurante.Models;
 
@@ -15,6 +16,7 @@ public partial class Usuario
 
     public int? IdSucursal { get; set; }
 
+    [Required]
     public int? IdRol { get; set; }
 
     public virtual Rol? IdRolNavigation { get; set; }

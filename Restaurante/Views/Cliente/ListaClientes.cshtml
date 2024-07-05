@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Lista de clientes";
 }
+
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
 <table class="table">
     <thead>
         <tr>
@@ -41,3 +44,4 @@
     </tbody>
 </table>
 
+}

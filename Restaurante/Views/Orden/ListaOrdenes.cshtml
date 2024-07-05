@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Lista de ordenes";
 }
+
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+
 @if (Model != null && Model.Any())
 {
     <table class="table">
@@ -50,4 +54,5 @@
             }
         </tbody>
     </table>
+}
 }

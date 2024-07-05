@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Restaurante.Models.Reseña>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (User.Identity!.IsAuthenticated)
+{
+    <script>
+        window.location.href = '@Url.Action("Create", "Reseña")';
+    </script>
+}
+<div class="text-center">
+    <a href="@Url.Action("Login", "Acceso")" class="btn btn-primary">
+        Estoy registrado
+    </a>
+</div>
+<div class="text-center">
+    <a href="@Url.Action("CreateCliente", "Usuario")" class="btn btn-primary">Soy nuevo </a>
+</div>
+
+
+
+
