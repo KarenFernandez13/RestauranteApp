@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
 <h1>Index</h1>
 
 <p>
@@ -57,3 +58,4 @@
 }
     </tbody>
 </table>
+}
