@@ -3,12 +3,27 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
-<hr />
-<h3>Ordenes</h3>
-<hr />
-<div>
-    <h3>Órdenes del día</h3>
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+
+<br />
+<h3 class="bold-text">Ordenes del día</h3>
+<br />
+<div>    
     <span>@DateTime.Now.ToString("dd/MM/yyyy")</span>
 </div>
 <br />
@@ -49,7 +64,7 @@
                         <td>@Html.DisplayFor(modelItem => item.Estado)</td>                        
                         <td>@Html.DisplayFor(modelItem => item.Total)</td>
                         <td>
-                            <a class="btn btn-primary" asp-controller="Pago" asp-action="Index">Cerrar</a>
+                            <a class="button-container text-center" asp-controller="Pago" asp-action="Index">Cerrar</a>
                         </td>
                         <td>
                             <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
@@ -65,8 +80,9 @@ else
 {
     <p>No hay datos disponibles.</p>
 }
+<br />
 <div>
-    <a class="btn btn-primary" href="@Url.Action("Index", "Producto")">Volver</a>
+    <a class="custom-btn" " href="@Url.Action("Index", "Producto")">Volver</a>
 </div>
 
 
