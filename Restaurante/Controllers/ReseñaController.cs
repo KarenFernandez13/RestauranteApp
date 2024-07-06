@@ -25,6 +25,11 @@ namespace Restaurante.Controllers
             return View(await restauranteContext.ToListAsync());
         }
 
+        public async Task<IActionResult> LoginCliente()
+        {
+            return View();
+        }
+
         // GET: Reseña/Details/5
         public async Task<IActionResult> Details(int? id)
         {

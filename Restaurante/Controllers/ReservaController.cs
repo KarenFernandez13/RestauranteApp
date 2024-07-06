@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using Restaurante.Models;
 
 namespace Restaurante.Controllers
 {
+    [Authorize(Policy = "CanVerReservas")]
     public class ReservaController : Controller
     {
         private readonly RestauranteContext _context;
@@ -43,10 +45,10 @@ namespace Restaurante.Controllers
                 var end = DateOnly.FromDateTime(endDate.Value);
                 reservas = reservas.Where(r => r.Fecha <= end);
             }
-            else 
+            else
             {
                 var today = DateOnly.FromDateTime(DateTime.Today);
-                reservas = reservas.Where(r => r.Fecha >= today);               
+                reservas = reservas.Where(r => r.Fecha >= today);
             }
             reservas = reservas.OrderBy(r => r.Fecha);
             return View(reservas.ToList());
@@ -201,7 +203,7 @@ namespace Restaurante.Controllers
             return _context.Reservas.Any(e => e.Id == id);
         }
 
-        
+
         [HttpPost]
         public IActionResult UpdateStatus(int id, string estado)
         {
@@ -218,6 +220,6 @@ namespace Restaurante.Controllers
         }
 
 
-       
+
     }
 }
