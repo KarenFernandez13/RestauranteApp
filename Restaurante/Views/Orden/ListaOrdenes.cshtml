@@ -3,6 +3,25 @@
 @{
     ViewData["Title"] = "Lista de ordenes";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+<br />
+<h3 class="bold-text">Lista de órdenes</h3>
+<br />
 @if (Model != null && Model.Any())
 {
     <table class="table">
@@ -51,3 +70,6 @@
         </tbody>
     </table>
 }
+<div>
+    <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
+</div>

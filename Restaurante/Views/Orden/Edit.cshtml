@@ -3,10 +3,25 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<hr />
-<h3>Editar</h3>
-<h3>Orden</h3>
-<hr />
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+
+<h3 class="centered-text">Editar orden</h3>
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -35,7 +50,7 @@
 </div>
 
 <div>
-    <a class="btn btn-primary" href="@Url.Action("Index", "Orden")">Volver</a>
+    <a class="custom-btn" href="@Url.Action("Index", "Orden")">Volver</a>
 </div>
 
 

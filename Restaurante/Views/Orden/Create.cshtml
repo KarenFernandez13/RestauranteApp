@@ -2,11 +2,25 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
-<hr />
-<h3>Nueva</h3>
-<h3>Orden</h3>
-<hr />
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+<br />
+<h3 class="bold-text">Nueva orden</h3>
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -15,14 +29,9 @@
                 <input asp-for="IdReserva" class="form-control" readonly />
                 <span asp-validation-for="IdReserva" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="IdUsuario" />
-         @*    <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" readonly />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div> *@
+            <input type="hidden" asp-for="IdUsuario" />        
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="custom-btn" />
             </div>
         </form>
     </div>
@@ -30,7 +39,7 @@
 <hr />
 
 <div>
-    <a class="btn btn-primary" href="@Url.Action("Index", "Orden")">Volver</a>
+    <a class="custom-btn" href="@Url.Action("Index", "Orden")">Volver</a>
 </div>
 
 

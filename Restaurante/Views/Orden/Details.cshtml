@@ -3,9 +3,25 @@
 @{
     ViewData["Title"] = "Details";
 }
-<hr />
-<h3>Info Orden</h3>
-<hr />
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+<br />
+<h3 class="bold-text">Info Orden</h3>
+<br />
 <div>
     <dl class="row">
         <dt class="col-sm-2">
@@ -34,8 +50,8 @@
         </dd>
     </dl>
 </div>
-<hr />
+<br />
 <div>
-    <a class="btn btn-primary" href="@Url.Action("Create", "OrdenDetalle", new { idOrden = Model.Id })">Agregar productos</a>
+    <a class="custom-btn" href="@Url.Action("Create", "OrdenDetalle", new { idOrden = Model.Id })">Agregar productos</a>
 </div>
 
