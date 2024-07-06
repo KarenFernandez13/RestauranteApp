@@ -1,8 +1,11 @@
-﻿@model IEnumerable<Restaurante.Models.Orden>
+﻿@using System.Security.Claims
+@model IEnumerable<Restaurante.Models.Orden>
 
 @{
     ViewData["Title"] = "Lista de ordenes";
 }
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
 <style>
     body {
         font-family: 'Playfair Display', serif;
@@ -73,3 +76,4 @@
 <div>
     <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
 </div>
+}

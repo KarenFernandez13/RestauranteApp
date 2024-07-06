@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 <style>
     body {
         font-family: 'Playfair Display', serif;
@@ -20,6 +21,46 @@
     }
 </style>
 
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+
+    <div>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Producto" asp-action="Index">Productos</a>
+                            </li>
+                           
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-contro ller="Reserva" asp-action="Index">Reservas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Orden" asp-action="Index">Ordenes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Listas" asp-action="Listas">Listados</a>
+                                </li>
+                           
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Salir">Salir</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
 <br />
 <h3 class="bold-text">Ordenes del día</h3>
 <br />
@@ -27,8 +68,8 @@
     <span>@DateTime.Now.ToString("dd/MM/yyyy")</span>
 </div>
 <br />
-@if (Model != null && Model.Any())
-{
+    @if (Model != null && Model.Any())
+    {
     <table class="table">
         <thead>
             <tr>
@@ -78,11 +119,13 @@
 }
 else
 {
-    <p>No hay datos disponibles.</p>
+<p>No hay datos disponibles.</p>
 }
-<br />
 <div>
-    <a class="custom-btn" " href="@Url.Action("Index", "Producto")">Volver</a>
+    <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
 </div>
+    
+}
+
 
 
