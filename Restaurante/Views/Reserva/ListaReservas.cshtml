@@ -1,0 +1,150 @@
+﻿<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+@model IEnumerable<Restaurante.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+<hr />
+<h4>Reservas</h4>
+<hr />
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
+</p>
+<hr />
+<div>
+    <h4>Buscar por fecha</h4>
+    <form method="get" action="@Url.Action("Index", "Reserva")" class="form-inline">
+        <div class="form-group">
+            <label for="startDate">Desde:  </label>
+            <input type="date" name="startDate" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="endDate">Hasta:  </label>
+            <input type="date" name="endDate" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Id Mesa</th>
+                <th>Ci Cliente</th>
+                <th>Estado</th>
+                <th></th>
+                <th></th>
+                <th>Orden</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Hora)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdMesaNavigation.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CiClienteNavigation.Ci)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td>
+                        <button class="btn btn-link change-status-btn" data-id="@item.Id">Cambiar Estado</button>
+                        <select class="form-control status-select" data-id="@item.Id" style="display: none;">
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Confirmada">Confirmada</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Opciones
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.Id })">Editar</a>
+                                <a class="dropdown-item" href="@Url.Action("Details", new { id = item.Id })">Ver Detalles</a>
+                                <a class="dropdown-item" href="@Url.Action("Delete", new { id = item.Id })">Eliminar</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="location.href='@Url.Action("CheckOrder", "Orden", new { idReserva = item.Id })'">O</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.change-status-btn').on('click', function () {
+                var id = $(this).data('id');
+                $(this).hide();
+                $('.status-select[data-id="' + id + '"]').show();
+            });
+
+            $('.status-select').on('change', function () {
+                var id = $(this).data('id');
+                var newStatus = $(this).val();
+                // Aquí puedes realizar una llamada AJAX para actualizar el estado en el servidor
+                $.ajax({
+                    url: '@Url.Action("UpdateStatus", "Reserva")',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        estado: newStatus
+                    },
+                    success: function (response) {
+                        // Manejar la respuesta del servidor (por ejemplo, mostrar un mensaje de éxito)
+                        location.reload(); // Recargar la página para reflejar los cambios
+                    },
+                    error: function (xhr, status, error) {
+                        // Manejar errores
+                        alert('Ocurrió un error al actualizar el estado.');
+                    }
+                });
+            });
+        });
+    </script>
+}
+<div>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Producto")">Volver</a>
+</div>
+}

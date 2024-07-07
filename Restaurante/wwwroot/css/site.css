@@ -1,0 +1,119 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 30px;
+}
+
+body {
+    background-image: url('/img/fondo4.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+}
+
+.image-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 80vh;
+    margin-bottom: 20px; 
+}
+
+.image3-container {
+    display: flex;
+    justify-content: left; 
+    align-items: center; 
+    width: 290px; 
+    height: auto; 
+    margin-bottom: 10px; 
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+}
+
+.custom-btn {
+    background-color: transparent; 
+    color: #333;
+    border: 1px solid #b85f33; 
+    padding: 10px 20px; 
+    text-decoration: none; 
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    .custom-btn:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: #333; 
+        border-color: #b85f33;
+    }
+
+footer {
+    position: relative;
+    height: 100px;
+}
+
+.small-image-container {
+    position: absolute;
+    bottom: 50px;
+    right: 10px;
+}
+
+    .small-image-container img {
+        width: 90px; 
+        height: auto; 
+    }
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.image2-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px; 
+    height: auto; 
+}
+
+.center-logo {
+    max-width: 100%; 
+    height: auto; 
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px; 
+    margin-bottom: 30px
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    width: 100%; 
+}
+
