@@ -21,11 +21,37 @@ namespace Restaurante.Controllers
         }
 
         // GET: Mesa
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateTime? fecha)
         {
-            var restauranteContext = _context.Mesas.Include(m => m.IdSucursalNavigation);
-            return View(await restauranteContext.ToListAsync());
+            if (!fecha.HasValue)
+            {
+                fecha = DateTime.Today;
+            }
+
+            var mesas = await _context.Mesas.Include(m => m.IdSucursalNavigation).ToListAsync();
+            var reservasDelDia = await _context.Reservas
+                .Where(r => r.Fecha == DateOnly.FromDateTime(fecha.Value))
+                .ToListAsync();
+
+            foreach (var mesa in mesas)
+            {
+                var reserva = reservasDelDia.FirstOrDefault(r => r.IdMesa == mesa.Id);
+                if (reserva != null)
+                {
+                    if (reserva.Estado == "Confirmada")
+                        mesa.Estado = "Ocupada";
+                    else if (reserva.Estado == "Pendiente")
+                        mesa.Estado = "Reservada";
+                    else
+                        mesa.Estado = "Disponible";
+
+                }
+            }
+
+            ViewData["Fecha"] = fecha.Value.ToString("yyyy-MM-dd");
+            return View(mesas);
         }
+
         // Marcar mesa como ocupada
         [HttpPost]
         public async Task<IActionResult> MarcarOcupada(int id)

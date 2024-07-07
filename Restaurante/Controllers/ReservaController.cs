@@ -249,6 +249,21 @@ namespace Restaurante.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Método para obtener mesas disponibles según la fecha
+        public IActionResult GetMesasDisponibles(DateTime fecha)
+        {
+            var mesasReservadas = _context.Reservas
+                .Where(r => r.Fecha == DateOnly.FromDateTime(fecha))
+                .Select(r => r.IdMesa)
+                .ToList();
+
+            var mesasDisponibles = _context.Mesas
+                .Where(m => !mesasReservadas.Contains(m.Id) && m.Estado == "Disponible")
+                .ToList();
+
+            return Json(mesasDisponibles);
+        }
+
         private bool ReservaExists(int id)
         {
             return _context.Reservas.Any(e => e.Id == id);
