@@ -86,7 +86,7 @@ namespace Restaurante.Controllers
         public IActionResult Create()
         {
             ViewData["CiCliente"] = new SelectList(_context.Clientes, "Ci", "Ci");
-            ViewData["IdMesa"] = new SelectList(_context.Mesas, "Id", "Id");
+            ViewData["IdMesa"] = new SelectList(_context.Mesas.Where(m => m.Estado == "Disponible"), "Id", "Numero");
             return View();
         }
 
@@ -101,10 +101,29 @@ namespace Restaurante.Controllers
             {
                 _context.Add(reserva);
                 await _context.SaveChangesAsync();
+                var mesa = await _context.Mesas.FindAsync(reserva.IdMesa);
+                if (mesa != null)
+                {
+                    if (reserva.Estado == "Pendiente")
+                    {
+                        mesa.Estado = "Reservada";
+
+                    }
+                    else if (reserva.Estado == "Confirmada")
+                    {
+                        mesa.Estado = "Ocupada";
+                    }
+                    else if (reserva.Estado == "Cancelada")
+                    {
+                        mesa.Estado = "Disponible";
+                    }
+                    _context.Update(mesa);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CiCliente"] = new SelectList(_context.Clientes, "Ci", "Ci", reserva.CiCliente);
-            ViewData["IdMesa"] = new SelectList(_context.Mesas, "Id", "Id", reserva.IdMesa);
+            ViewData["IdMesa"] = new SelectList(_context.Mesas.Where(m => m.Estado == "Disponible"), "Id", "Numero", reserva.IdMesa);
             return View(reserva);
         }
 
@@ -122,7 +141,7 @@ namespace Restaurante.Controllers
                 return NotFound();
             }
             ViewData["CiCliente"] = new SelectList(_context.Clientes, "Ci", "Ci", reserva.CiCliente);
-            ViewData["IdMesa"] = new SelectList(_context.Mesas, "Id", "Id", reserva.IdMesa);
+            ViewData["IdMesa"] = new SelectList(_context.Mesas, "Id", "Numero", reserva.IdMesa);
             return View(reserva);
         }
 
@@ -142,8 +161,31 @@ namespace Restaurante.Controllers
             {
                 try
                 {
+                    var mesaAnteriorId = _context.Reservas.AsNoTracking().FirstOrDefault(r => r.Id == id)?.IdMesa;
+
                     _context.Update(reserva);
                     await _context.SaveChangesAsync();
+
+                    // Actualizar estado de la mesa anterior a Disponible
+                    if (mesaAnteriorId.HasValue && mesaAnteriorId != reserva.IdMesa)
+                    {
+                        var mesaAnterior = await _context.Mesas.FindAsync(mesaAnteriorId.Value);
+                        if (mesaAnterior != null)
+                        {
+                            mesaAnterior.Estado = "Disponible";
+                            _context.Update(mesaAnterior);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+
+                    // Actualizar estado de la nueva mesa a Ocupada
+                    var nuevaMesa = await _context.Mesas.FindAsync(reserva.IdMesa);
+                    if (nuevaMesa != null)
+                    {
+                        nuevaMesa.Estado = "Ocupada";
+                        _context.Update(nuevaMesa);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -159,8 +201,8 @@ namespace Restaurante.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CiCliente"] = new SelectList(_context.Clientes, "Ci", "Ci", reserva.CiCliente);
-            ViewData["IdMesa"] = new SelectList(_context.Mesas, "Id", "Id", reserva.IdMesa);
-            return View();
+            ViewData["IdMesa"] = new SelectList(_context.Mesas, "Id", "Numero", reserva.IdMesa);
+            return View(reserva);
         }
 
         // GET: Reserva/Delete/5
@@ -192,6 +234,15 @@ namespace Restaurante.Controllers
             if (reserva != null)
             {
                 _context.Reservas.Remove(reserva);
+
+                // Actualizar estado de la mesa a Disponible
+                var mesa = await _context.Mesas.FindAsync(reserva.IdMesa);
+                if (mesa != null)
+                {
+                    mesa.Estado = "Disponible";
+                    _context.Update(mesa);
+                    await _context.SaveChangesAsync();
+                }
             }
 
             await _context.SaveChangesAsync();
