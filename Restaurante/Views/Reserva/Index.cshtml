@@ -1,10 +1,4 @@
-﻿<head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-
+﻿
 @model IEnumerable<Restaurante.Models.Reserva>
 
 @{
@@ -80,14 +74,17 @@
     <div>
         <h5>Buscar por fecha</h5>
         <form method="get" action="@Url.Action("Index", "Reserva")" class="form-inline">
-            <div class="form-group">
-                <label for="startDate">Desde:  </label>
-                <input type="date" name="startDate" class="form-control" />
+            <div>
+                <div class="form-group">
+                    <label for="startDate">Desde:  </label>
+                    <input type="date" name="startDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="endDate">Hasta:  </label>
+                    <input type="date" name="endDate" class="form-control" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="endDate">Hasta:  </label>
-                <input type="date" name="endDate" class="form-control" />
-            </div>
+            
             <button type="submit" class="custom-btn">Buscar</button>
         </form>
     </div>

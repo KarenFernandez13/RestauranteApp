@@ -6,8 +6,8 @@
     <img src="~/Img/logo2.png" alt="Logo" />
 </div>
 <div class="button-container text-center">
-    <a href="@Url.Action("Index", "Producto")" class="btn custom-btn">Ver menú</a>
-    <a href="@Url.Action("Index", "Reseña")" class="btn custom-btn">Reseñas</a>
+    <a href="@Url.Action("Index", "Producto")" class="custom-btn">Ver menú</a>
+    <a href="@Url.Action("Index", "Reseña")" class="custom-btn">Reseñas</a>
 </div>
 
 @if (!User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado

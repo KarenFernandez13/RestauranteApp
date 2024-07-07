@@ -95,9 +95,34 @@
     <a class="btn btn-primary" href="@Url.Action("Index", "Producto")">Volver</a>
 </div>
 
-@section Scripts {
+    @section Scripts {
     @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+
+        <script>
+            $(document).ready(function () {
+                $('#fechaReserva').on('change', function () {
+                    var fecha = $(this).val();
+                    if (fecha) {
+                        $.ajax({
+                            url: '@Url.Action("GetMesasDisponibles", "Reserva")',
+                            type: 'GET',
+                            data: { fecha: fecha },
+                            success: function (mesas) {
+                                var $mesasDisponibles = $('#mesasDisponibles');
+                                $mesasDisponibles.empty();
+                                $.each(mesas, function (index, mesa) {
+                                    $mesasDisponibles.append($('<option>', {
+                                        value: mesa.id,
+                                        text: mesa.numero
+                                    }));
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
     }
-}
 }

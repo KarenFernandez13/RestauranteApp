@@ -1,4 +1,11 @@
-﻿@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+﻿@model IEnumerable<Restaurante.Models.Mesa>
+
+@{
+    ViewData["Title"] = "Mesas";
+    var fecha = ViewData["Fecha"] as string ?? DateTime.Today.ToString("yyyy-MM-dd");
+}
+
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
     <div>
         <header>
@@ -41,6 +48,16 @@
         </header>
     </div>
 
+    <div>
+        <form method="get" action="@Url.Action("Index", "Mesa")" class="form-inline">
+            <div class="form-group">
+                <label for="fecha">Fecha: </label>
+                <input type="date" name="fecha" class="form-control" value="@fecha" />
+            </div>
+            <button type="submit" class="custom-btn">Buscar</button>
+        </form>
+    </div>
+
 <table class="table">
     <thead>
         <tr>
@@ -62,33 +79,33 @@
                     {
                         <form asp-action="MarcarOcupada" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="@mesa.Id" />
-                            <button type="submit" class="btn custom-btn" >Ocupada</button>
+                            <button type="submit" class="custom-btn" >Ocupada</button>
                         </form>
                         <form asp-action="MarcarReservada" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="@mesa.Id" />
-                            <button type="submit" class="btn custom-btn">Reservada</button>
+                            <button type="submit" class="custom-btn">Reservada</button>
                         </form>
                     }
                     else if (mesa.Estado == "Reservada")
                     {
                         <form asp-action="MarcarDisponible" method="post">
                             <input type="hidden" name="id" value="@mesa.Id" />
-                            <button type="submit" class="btn custom-btn">Disponible</button>
+                            <button type="submit" class="custom-btn">Disponible</button>
                         </form>
                         <form asp-action="MarcarOcupada" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="@mesa.Id" />
-                            <button type="submit" class="btn custom-btn">Ocupada</button>
+                            <button type="submit" class="custom-btn">Ocupada</button>
                         </form>
                     }
                     else if (mesa.Estado == "Ocupada")
                     {
                         <form asp-action="MarcarDisponible" method="post">
                             <input type="hidden" name="id" value="@mesa.Id" />
-                            <button type="submit" class="btn custom-btn">Disponible</button>
+                            <button type="submit" class="custom-btn">Disponible</button>
                         </form>
                         <form asp-action="MarcarReservada" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="@mesa.Id" />
-                            <button type="submit" class="btn custom-btn">Reservada</button>
+                            <button type="submit" class="custom-btn">Reservada</button>
                         </form>
                     }
                 </td>
