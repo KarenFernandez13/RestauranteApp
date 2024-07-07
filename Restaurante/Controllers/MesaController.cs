@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using Restaurante.Models;
 
 namespace Restaurante.Controllers
 {
+    [Authorize(Policy = "CanVerReservas")]
     public class MesaController : Controller
     {
         private readonly RestauranteContext _context;
@@ -23,6 +25,56 @@ namespace Restaurante.Controllers
         {
             var restauranteContext = _context.Mesas.Include(m => m.IdSucursalNavigation);
             return View(await restauranteContext.ToListAsync());
+        }
+        // Marcar mesa como ocupada
+        [HttpPost]
+        public async Task<IActionResult> MarcarOcupada(int id)
+        {
+            var mesa = await _context.Mesas.FindAsync(id);
+            if (mesa == null)
+            {
+                return NotFound();
+            }
+
+            mesa.Estado = "Ocupada";
+            _context.Update(mesa);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // Marcar mesa como disponible
+        [HttpPost]
+        public async Task<IActionResult> MarcarDisponible(int id)
+        {
+            var mesa = await _context.Mesas.FindAsync(id);
+            if (mesa == null)
+            {
+                return NotFound();
+            }
+
+            mesa.Estado = "Disponible";
+            _context.Update(mesa);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // Marcar mesa como reservada
+        [HttpPost]
+        public async Task<IActionResult> MarcarReservada(int id)
+        {
+            var mesa = await _context.Mesas.FindAsync(id);
+            if (mesa == null)
+            {
+                return NotFound();
+            }
+
+            mesa.Estado = "Reservada";
+            _context.Update(mesa);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Mesa/Details/5

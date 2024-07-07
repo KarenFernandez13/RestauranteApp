@@ -142,14 +142,14 @@ public partial class RestauranteContext : DbContext
 
             entity.HasOne(d => d.IdReservaNavigation).WithOne(r => r.Orden)
                 .HasForeignKey<Orden>(o => o.IdReserva)
-                .OnDelete(DeleteBehavior.Cascade)            
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fkOrdenReserva");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Ordens)
                 .HasForeignKey(d => d.IdUsuario)
                 .HasConstraintName("fkOrdenUsuario");
 
-            base.OnModelCreating(modelBuilder);               
+            base.OnModelCreating(modelBuilder);
         });
 
         modelBuilder.Entity<OrdenDetalle>(entity =>
@@ -223,13 +223,13 @@ public partial class RestauranteContext : DbContext
 
         modelBuilder.Entity<Rol>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("pkIdRol");
+            entity.HasKey(e => e.Id).HasName("pkRol");
 
             entity.ToTable("rol");
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
-                .HasColumnName("id");
+                .HasColumnName("Id");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -240,64 +240,50 @@ public partial class RestauranteContext : DbContext
             .HasMany(p => p.Roles)
             .WithMany(r => r.Permisos)
             .UsingEntity<Dictionary<string, object>>(
-                "PermisoRol",
+                "rolPermiso",
                 j => j
                     .HasOne<Rol>()
                     .WithMany()
                     .HasForeignKey("IdRol")
-                    .HasConstraintName("fkPermisoRolRol"),
+                    .HasConstraintName("fkRolPermiso1"),
                 j => j
                     .HasOne<Permiso>()
                     .WithMany()
-                    .HasForeignKey("NumeroPermiso")
-                    .HasConstraintName("fkPermisoRolPermiso"));
-
-        //modelBuilder.Entity<Permiso>(entity =>
-        //{
-        //    entity.HasKey(e => e.Numero).HasName("pkNumeroPermiso");
-
-        //    entity.ToTable("permiso");
-
-        //    entity.Property(e => e.Numero)
-        //        .ValueGeneratedNever()
-        //        .HasColumnName("numero");
-        //    entity.Property(e => e.Descripcion)
-        //        .HasMaxLength(50)
-        //        .IsUnicode(false)
-        //        .HasColumnName("descripcion");
-
-        //    entity.HasOne(d => d.Rol).WithMany(p => p.Permisos)
-        //        .HasForeignKey(d => d.IdRol)
-        //        .HasConstraintName("fkPermisoRol");
-        //});
+                    .HasForeignKey("numeroPermiso")
+                    .HasConstraintName("fkRolPermiso2"),
+                j =>
+                {
+                    j.HasKey("IdRol", "numeroPermiso").HasName("pkRolPermiso");
+                    j.ToTable("rolPermiso");
+                });
 
         modelBuilder.Entity<Producto>(entity =>
-            {
-                entity.HasKey(e => e.Codigo).HasName("PK__producto__40F9A207AF7DCEDA");
+        {
+            entity.HasKey(e => e.Codigo).HasName("PK__producto__40F9A207AF7DCEDA");
 
-                entity.ToTable("producto");
+            entity.ToTable("producto");
 
-                entity.Property(e => e.Codigo)
-                    .ValueGeneratedNever()
-                    .HasColumnName("codigo");
-                entity.Property(e => e.Descripcion)
-                        .HasMaxLength(100)
-                        .IsUnicode(false)
-                        .HasColumnName("descripcion");
-                entity.Property(e => e.Nombre)
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnName("nombre");
-                entity.Property(e => e.Precio).HasColumnName("precio");
-                entity.Property(e => e.Tipo)
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnName("tipo");
+            entity.Property(e => e.Codigo)
+                .ValueGeneratedNever()
+                .HasColumnName("codigo");
+            entity.Property(e => e.Descripcion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("descripcion");
+            entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("nombre");
+            entity.Property(e => e.Precio).HasColumnName("precio");
+            entity.Property(e => e.Tipo)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("tipo");
 
-                entity.HasOne(d => d.IdSucursalNavigation).WithMany(p => p.Productos)
-                        .HasForeignKey(d => d.IdSucursal)
-                        .HasConstraintName("fkProductoSucursal");
-            });
+            entity.HasOne(d => d.IdSucursalNavigation).WithMany(p => p.Productos)
+                    .HasForeignKey(d => d.IdSucursal)
+                    .HasConstraintName("fkProductoSucursal");
+        });
 
         modelBuilder.Entity<Reserva>(entity =>
         {

@@ -10,6 +10,7 @@ using Restaurante.Models;
 
 namespace Restaurante.Controllers
 {
+    [Authorize(Policy = "CanVerClientes")]
     public class ClienteController : Controller
     {
         private readonly RestauranteContext _context;

@@ -10,102 +10,144 @@
 @{
     ViewData["Title"] = "Index";
 }
-<style>
-    body {
-        font-family: 'Playfair Display', serif;
-        font-style: italic;
-    }
-
-    .centered-text {
-        text-align: center;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .bold-text {
-        font-weight: bold;
-    }
-</style>
-
-<br />
-<h3 class="bold-text">Reservas</h3>
-<br/>
-<div button-container>
-    <a class="custom-btn" href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
-</div>
-<br />
-<br />
-<div>
-    <h5>Buscar por fecha</h5>
-    <form method="get" action="@Url.Action("Index", "Reserva")" class="form-inline">
-        <div class="form-group">
-            <label for="startDate">Desde:  </label>
-            <input type="date" name="startDate" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label for="endDate">Hasta:  </label>
-            <input type="date" name="endDate" class="form-control" />
-        </div>
-        <button type="submit" class="custom-btn">Buscar</button>
-    </form>
-</div>
-<br />
-@if (Model != null && Model.Any())
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Id Mesa</th>
-                <th>Ci Cliente</th>
-                <th>Estado</th>
-                <th></th>
-                <th></th>
-                <th>Orden</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+
+    <div>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Producto" asp-action="Index">Productos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reserva" asp-action="Index">Reservas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orden" asp-action="Index">Ordenes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Listas" asp-action="Listas">Listados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Mesa" asp-action="Index">Mesas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Salir">Salir</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .centered-text {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .bold-text {
+            font-weight: bold;
+        }
+    </style>
+
+    <br />
+    <h3 class="bold-text">Reservas</h3>
+    <br />
+    <div button-container>
+        <a class="custom-btn" href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h5>Buscar por fecha</h5>
+        <form method="get" action="@Url.Action("Index", "Reserva")" class="form-inline">
+            <div class="form-group">
+                <label for="startDate">Desde:  </label>
+                <input type="date" name="startDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="endDate">Hasta:  </label>
+                <input type="date" name="endDate" class="form-control" />
+            </div>
+            <button type="submit" class="custom-btn">Buscar</button>
+        </form>
+    </div>
+    <br />
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Hora)</td>
-                    <td>@Html.DisplayFor(modelItem => item.IdMesaNavigation.Id)</td>
-                    <td>@Html.DisplayFor(modelItem => item.CiClienteNavigation.Ci)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
-                    <td>
-                        <button class="btn btn-link change-status-btn" data-id="@item.Id">Cambiar Estado</button>
-                        <select class="form-control status-select" data-id="@item.Id" style="display: none;">
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="Confirmada">Confirmada</option>
-                            <option value="Cancelada">Cancelada</option>
-                        </select>
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="custom-btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Opciones
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.Id })">Editar</a>
-                                <a class="dropdown-item" href="@Url.Action("Details", new { id = item.Id })">Ver Detalles</a>
-                                <a class="dropdown-item" href="@Url.Action("Delete", new { id = item.Id })">Eliminar</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <button class="custom-btn" onclick="location.href='@Url.Action("CheckOrder", "Orden", new { idReserva = item.Id })'">O</button>
-                    </td>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Mesa</th>
+                    <th>Ci Cliente</th>
+                    <th>Estado</th>
+                    <th></th>
+                    <th></th>
+                    <th>Orden</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Hora)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IdMesaNavigation.Numero)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CiClienteNavigation.Ci)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                        <td>
+                            <button class="btn btn-link change-status-btn" data-id="@item.Id">Cambiar Estado</button>
+                            <select class="form-control status-select" data-id="@item.Id" style="display: none;">
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Confirmada">Confirmada</option>
+                                <option value="Cancelada">Cancelada</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="custom-btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Opciones
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.Id })">Editar</a>
+                                    <a class="dropdown-item" href="@Url.Action("Details", new { id = item.Id })">Ver Detalles</a>
+                                    <a class="dropdown-item" href="@Url.Action("Delete", new { id = item.Id })">Eliminar</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="custom-btn" onclick="location.href='@Url.Action("CheckOrder", "Orden", new { idReserva = item.Id })'">O</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 
 
-@section Scripts {
+    @section Scripts {
     <script>
         $(document).ready(function () {
             $('.change-status-btn').on('click', function () {
@@ -136,8 +178,9 @@
                 });
             });
         });
-    </script>   
+    </script>
+    }
+    <div>
+        <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
+    </div>
 }
-<div>
-    <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
-</div>

@@ -6,8 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Restaurante.Models;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Restaurante.Controllers
 {
+
+    [Authorize(Policy = "CanVerOrdenes")]
     public class OrdenController : Controller
     {
         private readonly RestauranteContext _context;
