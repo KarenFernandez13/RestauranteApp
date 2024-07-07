@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Restaurante.Models.Orden>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+
+    <div>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Producto" asp-action="Index">Productos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reserva" asp-action="Index">Reservas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orden" asp-action="Index">Ordenes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Listas" asp-action="Listas">Listados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Mesa" asp-action="Index">Mesas</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Salir">Salir</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+<br />
+<h3 class="bold-text">Ordenes del día</h3>
+<br />
+<div>    
+    <span>@DateTime.Now.ToString("dd/MM/yyyy")</span>
+</div>
+<br />
+    @if (Model != null && Model.Any())
+    {
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id Mesa</th>
+                <th>Ci Cliente</th>
+                <th>Estado</th>
+                <th>Total</th>
+                <th>Cerrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item != null && item.IdReservaNavigation != null && item.IdReservaNavigation.Fecha == DateOnly.FromDateTime(DateTime.Today))
+                {
+                    <tr>
+                        @if(item.IdReservaNavigation.IdMesaNavigation.Numero != null)
+                        {
+                            <td>@Html.DisplayFor(modelItem => item.IdReservaNavigation.IdMesaNavigation.Numero)</td>
+                        }
+                        else
+                        {
+                            <td> - </td>
+                        }
+                        @if (item.IdReservaNavigation.CiCliente != null)
+                        {
+                            <td>@Html.DisplayFor(modelItem => item.IdReservaNavigation.CiCliente)</td>
+                        }
+                        else
+                        {
+                            <td>No CI</td>
+                        }
+                        <td>@Html.DisplayFor(modelItem => item.Estado)</td>                        
+                        <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                        <td>
+                            <a class="button-container text-center" asp-controller="Pago" asp-action="Index">Cerrar</a>
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+<p>No hay datos disponibles.</p>
+}
+<div>
+    <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
+</div>
+    
+}
+
+
+

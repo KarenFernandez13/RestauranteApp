@@ -1,0 +1,198 @@
+﻿@using System.Security.Claims
+@model IEnumerable<Restaurante.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+
+    <div>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Producto" asp-action="Index">Productos</a>
+                            </li>
+                           
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reserva" asp-action="Index">Reservas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Orden" asp-action="Index">Ordenes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Listas" asp-action="Listas">Listados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Mesa" asp-action="Index">Mesas</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Salir">Salir</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+}
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+<div >
+    <img src="~/Img/logo2.png" alt="Logo" class="image3-container " />
+</div>
+<br />
+<h1 class="centered-text">Menú</h1>
+<br />
+
+<h3 class="bold-text">Entradas</h3>
+<table class="table">
+    <thead>
+        <tr title="Entradas">
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Tipo == "Entradas")
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+<hr />
+<br />
+<h3 class="bold-text">Ensaladas</h3>
+<table class="table">
+    <thead>
+        <tr title="Ensaladas">
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Tipo == "Ensaladas")
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+<hr />
+<br />
+<h3 class="bold-text">Platos principales</h3>
+<table class="table">
+    <thead>
+        <tr title="Platos">
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Tipo == "Platos")
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+<hr />
+<br />
+<h3 class="bold-text">Postres</h3>
+<table class="table">
+    <thead>
+        <tr title="Postres">
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Tipo == "Postres")
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+<hr />
+<br />
+<h3 class="bold-text">Bebidas</h3>
+<table class="table">
+    <thead>
+        <tr title="Bebidas">
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Tipo == "Bebidas")
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+<div class="main-container">
+    <img src="~/Img/icono.png" alt="Logo" class="image2-container" class="center-logo" />
+</div>
+<div>
+    <a class="custom-btn" href="@Url.Action("Index", "Home")">Volver</a>
+</div>
+
+
+

@@ -1,0 +1,50 @@
+﻿@model Restaurante.Models.Orden
+@{
+    ViewData["Title"] = "Create";
+}
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+
+    <style>
+        body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        }
+
+        .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+        }
+
+        .bold-text {
+        font-weight: bold;
+        }
+    </style>
+    <br />
+    <h3 class="bold-text">Nueva orden</h3>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div>
+                    <label asp-for="IdReserva" class="control-label"></label>
+                    <input asp-for="IdReserva" class="form-control" readonly />
+                    <span asp-validation-for="IdReserva" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="IdUsuario" />        
+                <div class="form-group">
+                    <input type="submit" value="Create" class="custom-btn" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+
+    <div>
+        <a class="custom-btn" href="@Url.Action("Index", "Orden")">Volver</a>
+    </div>
+
+
+
+}
