@@ -18,16 +18,16 @@ namespace Restaurante.Controllers
         public ReservaController(RestauranteContext context)
         {
             _context = context;
-        }
+        }        
 
         // GET: Reserva
-        public IActionResult Index(DateTime? startDate, DateTime? endDate)
+        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate)
         {
             var reservas = _context.Reservas
                            .Include(r => r.IdMesaNavigation)
                            .Include(r => r.CiClienteNavigation)
                            .AsQueryable();
-
+            
             if (startDate.HasValue && endDate.HasValue)
             {
                 var start = DateOnly.FromDateTime(startDate.Value);
@@ -49,8 +49,11 @@ namespace Restaurante.Controllers
                 var today = DateOnly.FromDateTime(DateTime.Today);
                 reservas = reservas.Where(r => r.Fecha >= today);
             }
-            reservas = reservas.OrderBy(r => r.Fecha);
+            reservas = reservas.OrderBy(r => r.Fecha);           
+
             return View(reservas.ToList());
+
+            
         }
 
 

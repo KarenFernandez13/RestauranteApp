@@ -1009,3 +1009,4 @@ C:\Users\Usuario\Documents\RestauranteApp\Restaurante\obj\Debug\net8.0\refint\Re
 C:\Users\Usuario\Documents\RestauranteApp\Restaurante\obj\Debug\net8.0\Restaurante.pdb
 C:\Users\Usuario\Documents\RestauranteApp\Restaurante\obj\Debug\net8.0\Restaurante.genruntimeconfig.cache
 C:\Users\Usuario\Documents\RestauranteApp\Restaurante\obj\Debug\net8.0\ref\Restaurante.dll
+C:\Users\Usuario\Documents\RestauranteApp\Restaurante\obj\Debug\net8.0\Restaurante.sourcelink.json

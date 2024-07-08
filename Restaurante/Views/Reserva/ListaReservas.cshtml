@@ -34,8 +34,9 @@
 
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
-<hr />
-<h4>Reservas</h4>
+
+<br />
+<h4>Lista de Reservas</h4>
 <hr />
 <p>
     <a class="btn btn-primary" href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>

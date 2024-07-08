@@ -64,10 +64,10 @@
         </nav>
     </header>
 </div>
+<br />
+    <h3 class="bold-text">~ Editar Reserva ~</h3>
 <hr />
-<h3>Editar</h3>
-<h3>Reserva</h3>
-<hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -105,14 +105,14 @@
             </div>        
             <br/>
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="custom-btn" />
             </div>
         </form>
     </div>
 </div>
 <hr/>
 <div>
-    <a class="btn btn-primary" href="@Url.Action("Index", "Producto")">Volver</a>
+    <a class="custom-btn" href="@Url.Action("Index", "Reserva")">Volver</a>
 </div>
 
 @section Scripts {

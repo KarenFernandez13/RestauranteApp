@@ -1,14 +1,50 @@
-﻿@{
+﻿@* Home Index *@
+@{
     ViewData["Title"] = "Home Page";
+    var clima = ViewBag.Clima as Clima;
+    var error = ViewBag.Error as string;
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .bold-text {
+        font-weight: bold;
+        color: #333;
+    }    
+</style>
 
 <div class="image-container">
     <img src="~/Img/logo2.png" alt="Logo" />
 </div>
+
 <div class="button-container text-center">
-    <a href="@Url.Action("Index", "Producto")" class="custom-btn">Ver menú</a>
+    <a href="@Url.Action("Index", "Producto")" class="custom-btn">Menú</a>
     <a href="@Url.Action("Index", "Reseña")" class="custom-btn">Reseñas</a>
-</div>
+
+</div
+
+<br />
+
+@if (!string.IsNullOrEmpty(error))
+{
+    <div class="alert alert-danger">@error</div>
+}
+else if (clima != null)
+{
+    <div style="display: flex; align-items: center";>
+        <label style="margin-right: 10px;" class="bold-text">Temperatura: </label>
+        <p class="bold-text" style="margin-right: 20px; margin-bottom: 0;"> @clima.Temperatura °C</p>
+        <label style="margin-right: 10px;" class="bold-text"> - Descripción: </label>
+        <p class="bold-text" style="margin-right: 20px; margin-bottom: 0;">@clima.Descripcion</p>
+    </div>    
+}
+else
+{
+    <p>No se pudo obtener la información del clima.</p>
+}
 
 @if (!User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
