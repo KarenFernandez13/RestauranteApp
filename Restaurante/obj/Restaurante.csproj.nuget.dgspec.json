@@ -1,6 +1,19 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "C:\\Users\\Usuario\\Documents\\RestauranteApp\\Restaurante\\Restaurante.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Usuario\\Documents\\RestauranteApp\\Restaurante\\Restaurante.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\RestauranteApp\\Restaurante\\Restaurante.csproj",
+        "projectName": "Restaurante",
+        "projectPath": "C:\\Users\\Usuario\\Documents\\RestauranteApp\\Restaurante\\Restaurante.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Documents\\RestauranteApp\\Restaurante\\obj\\",
+=======
     "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\Restaurante.csproj": {}
   },
   "projects": {
@@ -12,12 +25,17 @@
         "projectPath": "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\Restaurante.csproj",
         "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\obj\\",
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
           "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +44,10 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
+          "C:\\Program Files\\dotnet\\library-packs": {},
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,6 +94,13 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.2, )"
+<<<<<<< HEAD
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
             }
           },
           "imports": [

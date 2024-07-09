@@ -3,6 +3,28 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<<<<<<< HEAD
+
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+</style>
+
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
 <div>
@@ -45,10 +67,17 @@
         </nav>
     </header>
 </div>
+<<<<<<< HEAD
+<br />
+    <h3 class="bold-text">~ Editar Reserva ~</h3>
+<hr />
+<br />
+=======
 <hr />
 <h3>Editar</h3>
 <h3>Reserva</h3>
 <hr />
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -86,14 +115,22 @@
             </div>        
             <br/>
             <div class="form-group">
+<<<<<<< HEAD
+                <input type="submit" value="Guardar" class="custom-btn" />
+=======
                 <input type="submit" value="Guardar" class="btn btn-primary" />
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
             </div>
         </form>
     </div>
 </div>
 <hr/>
 <div>
+<<<<<<< HEAD
+    <a class="custom-btn" href="@Url.Action("Index", "Reserva")">Volver</a>
+=======
     <a class="btn btn-primary" href="@Url.Action("Index", "Producto")">Volver</a>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 </div>
 
 @section Scripts {

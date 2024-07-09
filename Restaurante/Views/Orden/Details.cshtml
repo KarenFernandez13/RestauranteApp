@@ -2,6 +2,12 @@
 
 @{
     ViewData["Title"] = "Details";
+<<<<<<< HEAD
+    var exchangeRate = ViewBag.ExchangeRate as decimal?;
+    var discountPercentage = ViewBag.DiscountPercentage as double?;
+    var totalConDescuento = ViewBag.TotalConDescuento as double?;
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 }
 <style>
     body {
@@ -20,8 +26,14 @@
     }
 </style>
 <br />
+<<<<<<< HEAD
+<h3 class="bold-text">~ Info Orden ~</h3>
+<br />
+<hr />
+=======
 <h3 class="bold-text">Info Orden</h3>
 <br />
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 <div>
     <dl class="row">
         <dt class="col-sm-2">
@@ -48,10 +60,55 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Total)
         </dd>
+<<<<<<< HEAD
+        <dt class="col-sm-2">
+            Descuento aplicado
+        </dt>
+        <dd class="col-sm-10">
+            @discountPercentage %
+        </dd>
+        <dt class="col-sm-2">
+            Total con descuento
+        </dt>
+        <dd class="col-sm-10">
+            @totalConDescuento
+        </dd>
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     </dl>
 </div>
 <br />
 <div>
     <a class="custom-btn" href="@Url.Action("Create", "OrdenDetalle", new { idOrden = Model.Id })">Agregar productos</a>
 </div>
+<<<<<<< HEAD
+<br />
+<br />
+<h3 class="bold-text">~ Detalles de la Orden ~</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrdenDetalles)
+        {
+            <tr>
+                <td>@item.CodigoProdNavigation.Nombre</td>
+                <td>@item.Cantidad</td>
+                <td>@item.CodigoProdNavigation.Precio</td>
+                <td>@(item.Cantidad * item.CodigoProdNavigation.Precio)</td>               
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 

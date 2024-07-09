@@ -3,11 +3,39 @@
 @{
     ViewData["Title"] = "Details";
 }
+<<<<<<< HEAD
+
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+  
+</style>
+
+<br/>
+<h3 class="bold-text">~ Detalles de Reserva ~</h3>
+<hr>
+<br />
+<div>    
+=======
 <hr/>
 <h3>Detalles</h3>
 <h3>Reserva</h3>
 <div>    
     <hr />
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     <dl class="row">
         <dt class = "col-sm-2"> 
             Fecha
@@ -41,10 +69,17 @@
         </dd>
     </dl>
 </div>
+<<<<<<< HEAD
+<br />
+<br />
+<div>
+    <a class="custom-btn" href="@Url.Action("Index", "Reserva")">Volver</a>
+=======
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Editar</a>    
 </div>
 <hr />
 <div>
     <a class="btn btn-primary" href="@Url.Action("Index", "Reserva")">Volver</a>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 </div>

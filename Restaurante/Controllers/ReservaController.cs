@@ -18,17 +18,28 @@ namespace Restaurante.Controllers
         public ReservaController(RestauranteContext context)
         {
             _context = context;
+<<<<<<< HEAD
+        }        
+
+        // GET: Reserva
+        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate)
+=======
         }
 
         // GET: Reserva
 
         public IActionResult Index(DateTime? startDate, DateTime? endDate)
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         {
             var reservas = _context.Reservas
                            .Include(r => r.IdMesaNavigation)
                            .Include(r => r.CiClienteNavigation)
                            .AsQueryable();
+<<<<<<< HEAD
+            
+=======
 
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
             if (startDate.HasValue && endDate.HasValue)
             {
                 var start = DateOnly.FromDateTime(startDate.Value);
@@ -50,8 +61,16 @@ namespace Restaurante.Controllers
                 var today = DateOnly.FromDateTime(DateTime.Today);
                 reservas = reservas.Where(r => r.Fecha >= today);
             }
+<<<<<<< HEAD
+            reservas = reservas.OrderBy(r => r.Fecha);           
+
+            return View(reservas.ToList());
+
+            
+=======
             reservas = reservas.OrderBy(r => r.Fecha);
             return View(reservas.ToList());
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         }
 
 
@@ -91,8 +110,11 @@ namespace Restaurante.Controllers
         }
 
         // POST: Reserva/Create
+<<<<<<< HEAD
+=======
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CiCliente,Fecha,Hora,IdMesa,Estado")] Reserva reserva)
@@ -146,8 +168,11 @@ namespace Restaurante.Controllers
         }
 
         // POST: Reserva/Edit/5
+<<<<<<< HEAD
+=======
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CiCliente,Fecha,Hora,IdMesa,Estado")] Reserva reserva)
@@ -284,8 +309,12 @@ namespace Restaurante.Controllers
 
             return Json(new { success = true });
         }
+<<<<<<< HEAD
+        
+=======
 
 
 
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     }
 }

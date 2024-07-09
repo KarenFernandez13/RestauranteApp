@@ -3,9 +3,50 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<<<<<<< HEAD
+
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .btn-delete {
+        background-color: lightslategrey;
+        color: black;
+        border: 1px solid #b85f33;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-weight: bold;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .btn-delete:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #333;
+            border-color: #b85f33;
+        }
+</style>
+
+<br/>
+<h3>~ Eliminar Reserva ~</h3>
+=======
 <hr/>
 <h3>Eliminar</h3>
 <h3>Reserva</h3>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 <hr/>
 <div>        
     <dl class="row">
@@ -40,6 +81,16 @@
             @Html.DisplayFor(model => model.IdMesaNavigation.Id)
         </dd>
     </dl>
+<<<<<<< HEAD
+    <br/>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn-delete" />
+    </form>
+    <br />
+    <div>
+        <a class="custom-btn" href="@Url.Action("Index", "Reserva")">Volver</a>
+=======
     <hr/>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
@@ -48,5 +99,6 @@
     <hr />
     <div>
         <a class="btn btn-primary" href="@Url.Action("Index", "Reserva")">Volver</a>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     </div>
 </div>

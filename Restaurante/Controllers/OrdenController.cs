@@ -15,12 +15,39 @@ namespace Restaurante.Controllers
     public class OrdenController : Controller
     {
         private readonly RestauranteContext _context;
+<<<<<<< HEAD
+        private readonly WeatherService _weatherService;
+
+        public OrdenController(RestauranteContext context, WeatherService weatherService)
+        {
+            _context = context;
+            _weatherService = weatherService;
+        }
+
+        private async Task UpdateOrdenTotalAsync(int idOrden)
+        {
+            var orden = await _context.Orden
+                .Include(o => o.OrdenDetalles)
+                .FirstOrDefaultAsync(o => o.Id == idOrden);
+
+            if (orden != null)
+            {
+                orden.Total = orden.OrdenDetalles.Sum(od => od.Cantidad * od.CodigoProdNavigation.Precio);
+                var clima = await _weatherService.GetTemperatureAsync();
+                double descuento = CalculateDiscountPercentage(clima.Temperatura, clima.Descripcion);
+                orden.Total -= orden.Total * descuento / 100;
+            }
+        }
+
+
+=======
 
         public OrdenController(RestauranteContext context)
         {
             _context = context;
         }
 
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         // GET: Orden
         public async Task<IActionResult> ListaOrdenes()
         {
@@ -40,7 +67,11 @@ namespace Restaurante.Controllers
                                         .ToList();
             return View(ordenes);
         }
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 
         // GET: Orden/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -50,12 +81,21 @@ namespace Restaurante.Controllers
                 return BadRequest();
             }
 
+<<<<<<< HEAD
+            var orden = await _context.Orden
+                .Include(o => o.IdReservaNavigation)
+                .ThenInclude(r => r.CiClienteNavigation)
+                .Include(o => o.IdUsuarioNavigation)
+                .Include(o => o.OrdenDetalles)
+                .ThenInclude(od => od.CodigoProdNavigation)
+=======
             // Usar FirstOrDefaultAsync para la consulta asincrónica
             var orden = await _context.Orden
                 .Include(o => o.IdReservaNavigation) // Incluye la navegación de Reserva si es necesario
                 .Include(o => o.IdUsuarioNavigation) // Incluye la navegación de Usuario si es necesario
                 .Include(o => o.OrdenDetalles) // Incluye los detalles de la orden si es necesario
                 .Include(o => o.Pagos) // Incluye los pagos si es necesario
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
                 .FirstOrDefaultAsync(o => o.Id == id);
 
             if (orden == null)
@@ -63,6 +103,22 @@ namespace Restaurante.Controllers
                 return NotFound();
             }
 
+<<<<<<< HEAD
+            var clima = await _weatherService.GetTemperatureAsync();
+            var discountPercentage = CalculateDiscountPercentage(clima.Temperatura, clima.Descripcion);
+            orden.Total = orden.OrdenDetalles.Sum(od => od.Cantidad * od.CodigoProdNavigation.Precio);
+            var totalConDescuento = orden.Total - (orden.Total * (double)discountPercentage / 100);
+            ViewBag.TotalConDescuento = totalConDescuento;
+            ViewBag.discountPercentage = discountPercentage;
+            return View(orden);
+        }
+
+
+        // GET: Orden/Create
+        public async Task<IActionResult> Create(int idReserva)
+        {
+            var reserva = await _context.Reservas.FindAsync(idReserva);
+=======
             return View(orden);
         }
     
@@ -72,22 +128,56 @@ namespace Restaurante.Controllers
         {
 
             var reserva = _context.Reservas.Find(idReserva);
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
             if (reserva == null)
             {
                 return NotFound();
             }
 
+<<<<<<< HEAD
+            var clima = await _weatherService.GetTemperatureAsync();
+            var discountPercentage = CalculateDiscountPercentage(clima.Temperatura, clima.Descripcion);
+
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
             var orden = new Orden
             {
                 IdReserva = idReserva,
                 Estado = "Activa",
                 OrdenDetalles = new List<OrdenDetalle>()
+<<<<<<< HEAD
+            };
+
+            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
+            return View(orden);
+        }
+        //public IActionResult Create(int idReserva)
+        //{
+        //    var reserva = _context.Reservas.Find(idReserva);
+        //    if (reserva == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var orden = new Orden
+        //    {
+        //        IdReserva = idReserva,
+        //        Estado = "Activa",
+        //        OrdenDetalles = new List<OrdenDetalle>()            Descuento = discountPercentage
+        //    };         
+
+        //    ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
+        //    return View();
+
+        //}
+=======
             };         
 
             ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
             return View();
 
         }
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 
 
         [HttpPost]
@@ -229,8 +319,33 @@ namespace Restaurante.Controllers
             _context.SaveChanges();
 
             return Json(new { success = true });
+<<<<<<< HEAD
+        }
+
+        private double CalculateDiscountPercentage(double temperature, string description)
+        {
+            double discount = 0;
+
+            if (temperature <= 10)
+            {
+                discount = 5;
+            }
+            else if (temperature < 0)
+            {
+                discount = 10;
+            }
+
+            if (description.Contains("rain", StringComparison.OrdinalIgnoreCase))
+            {
+                discount += 5;
+            }
+
+            return discount;
+        }
+=======
         }           
 
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     }
 }
 
