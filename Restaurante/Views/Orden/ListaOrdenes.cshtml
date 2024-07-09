@@ -4,6 +4,27 @@
 @{
     ViewData["Title"] = "Lista de ordenes";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
 <style>
@@ -48,32 +69,13 @@
                     <td>@Html.DisplayFor(modelItem => item.Total)</td>
                     <td>@Html.DisplayFor(modelItem => item.Estado)</td>
                     <td>@Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Id)</td>
-                    <td>
-                        <button class="btn btn-link change-status-btn" data-id="@item.Id">Cambiar Estado</button>
-                        <select class="form-control status-select" data-id="@item.Id" style="display: none;">
-                            <option value="Activa">Activa</option>
-                            <option value="Cerrada">Cerrada</option>                            
-                        </select>
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Opciones
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.Id })">Editar</a>
-                                <a class="dropdown-item" href="@Url.Action("Details", new { id = item.Id })">Ver Detalles</a>
-                                <a class="dropdown-item" href="@Url.Action("Delete", new { id = item.Id })">Eliminar</a>
-                            </div>
-                        </div>
-                    </td>
+                                     
                 </tr>
             }
         </tbody>
     </table>
 }
 <div>
-    <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
+    <a class="custom-btn" href="@Url.Action("Listas", "Listas")">Volver</a>
 </div>
 }

@@ -1,20 +1,30 @@
-<<<<<<< HEAD
-﻿@model IEnumerable<Restaurante.Models.Reserva>
-
-@{
-    ViewData["Title"] = "Index";
-    
-}
-
-
-=======
-﻿
 @model IEnumerable<Restaurante.Models.Reserva>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Reservas";
 }
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
 
@@ -57,55 +67,21 @@
             </nav>
         </header>
     </div>
-    <style>
-        body {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-        }
-
-        .centered-text {
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .bold-text {
-            font-weight: bold;
-        }
-<<<<<<< HEAD
-
-        .date-input {
-            width: 150px;
-            display: inline-block;
-        }
-    </style>
-
     <br />
-    <h3 class="bold-text">~ Reservas ~</h3>      
+    <h3 class="bold-text">~ Reservas ~</h3>
     <hr />
-=======
-    </style>
-
     <br />
-    <h3 class="bold-text">Reservas</h3>
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
-    <br />
-    <div button-container>
-        <a class="custom-btn" href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
+    <div button-container class="">
+        <a class="custom-btn " href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
     </div>
     <br />
     <br />
     <div>
-<<<<<<< HEAD
-        <h5 class="bold-text">Buscar por fecha</h5>
-=======
         <h5>Buscar por fecha</h5>
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         <form method="get" action="@Url.Action("Index", "Reserva")" class="form-inline">
             <div>
                 <div class="form-group">
                     <label for="startDate">Desde:  </label>
-<<<<<<< HEAD
                     <input type="date" name="startDate" class="form-control date-input" />
                 </div>
                 <br />
@@ -113,21 +89,13 @@
                     <label for="endDate">Hasta:  </label>
                     <input type="date" name="endDate" class="form-control date-input" />
                 </div>
-            </div>
-            <br />
-=======
-                    <input type="date" name="startDate" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="endDate">Hasta:  </label>
-                    <input type="date" name="endDate" class="form-control" />
-                </div>
-            </div>
-            
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
-            <button type="submit" class="custom-btn">Buscar</button>
+            </div>         
         </form>
     </div>
+    <br />
+    <div>
+        <button type="submit" class="custom-btn">Buscar</button>
+    </div>    
     <br />
     @if (Model != null && Model.Any())
     {
@@ -138,9 +106,7 @@
                     <th>Hora</th>
                     <th>Mesa</th>
                     <th>Ci Cliente</th>
-                    <th>Estado</th>
-                    <th></th>
-                    <th></th>
+                    <th>Estado</th>                    
                     <th>Orden</th>
                 </tr>
             </thead>
@@ -164,12 +130,8 @@
                         <td>
                             <div class="dropdown">
                                 <button class="custom-btn dropdown-toggle" type="button" id="dropdownMenuButton"
-<<<<<<< HEAD
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-=======
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
-                                    Opciones
+                                        Opciones                                   
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.Id })">Editar</a>
@@ -186,14 +148,10 @@
             </tbody>
         </table>
     }
-
-<<<<<<< HEAD
+    <br />
+    
 }
 @section Scripts {
-=======
-
-    @section Scripts {
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     <script>
         $(document).ready(function () {
             $('.change-status-btn').on('click', function () {
@@ -225,15 +183,4 @@
             });
         });
     </script>
-    }
-<<<<<<< HEAD
-<br />
-<div>
-    <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
-</div>
-=======
-    <div>
-        <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
-    </div>
 }
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2

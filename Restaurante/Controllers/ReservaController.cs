@@ -18,28 +18,19 @@ namespace Restaurante.Controllers
         public ReservaController(RestauranteContext context)
         {
             _context = context;
-<<<<<<< HEAD
-        }        
 
-        // GET: Reserva
-        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate)
-=======
         }
 
         // GET: Reserva
 
         public IActionResult Index(DateTime? startDate, DateTime? endDate)
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
+
         {
             var reservas = _context.Reservas
                            .Include(r => r.IdMesaNavigation)
                            .Include(r => r.CiClienteNavigation)
                            .AsQueryable();
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
             if (startDate.HasValue && endDate.HasValue)
             {
                 var start = DateOnly.FromDateTime(startDate.Value);
@@ -61,16 +52,10 @@ namespace Restaurante.Controllers
                 var today = DateOnly.FromDateTime(DateTime.Today);
                 reservas = reservas.Where(r => r.Fecha >= today);
             }
-<<<<<<< HEAD
-            reservas = reservas.OrderBy(r => r.Fecha);           
 
-            return View(reservas.ToList());
-
-            
-=======
             reservas = reservas.OrderBy(r => r.Fecha);
+
             return View(reservas.ToList());
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         }
 
 
@@ -110,11 +95,7 @@ namespace Restaurante.Controllers
         }
 
         // POST: Reserva/Create
-<<<<<<< HEAD
-=======
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CiCliente,Fecha,Hora,IdMesa,Estado")] Reserva reserva)
@@ -168,11 +149,7 @@ namespace Restaurante.Controllers
         }
 
         // POST: Reserva/Edit/5
-<<<<<<< HEAD
-=======
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CiCliente,Fecha,Hora,IdMesa,Estado")] Reserva reserva)
@@ -207,7 +184,13 @@ namespace Restaurante.Controllers
                     var nuevaMesa = await _context.Mesas.FindAsync(reserva.IdMesa);
                     if (nuevaMesa != null)
                     {
-                        nuevaMesa.Estado = "Ocupada";
+                        if (reserva.Estado == "Confirmada")
+                            nuevaMesa.Estado = "Ocupada";
+                        else if (reserva.Estado == "Pendiente")
+                            nuevaMesa.Estado = "Reservada";
+                        else if (reserva.Estado == "Cancelada")
+                            nuevaMesa.Estado = "Disponible";
+
                         _context.Update(nuevaMesa);
                         await _context.SaveChangesAsync();
                     }
@@ -242,6 +225,7 @@ namespace Restaurante.Controllers
                 .Include(r => r.CiClienteNavigation)
                 .Include(r => r.IdMesaNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            
             if (reserva == null)
             {
                 return NotFound();
@@ -255,19 +239,34 @@ namespace Restaurante.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reserva = await _context.Reservas.FindAsync(id);
-            if (reserva != null)
-            {
-                _context.Reservas.Remove(reserva);
+            var reserva = await _context.Reservas
+            .Include(r => r.CiClienteNavigation)
+            .Include(r => r.IdMesaNavigation)
+            .FirstOrDefaultAsync(m => m.Id == id);
 
-                // Actualizar estado de la mesa a Disponible
-                var mesa = await _context.Mesas.FindAsync(reserva.IdMesa);
-                if (mesa != null)
-                {
-                    mesa.Estado = "Disponible";
-                    _context.Update(mesa);
-                    await _context.SaveChangesAsync();
-                }
+            if (reserva == null)
+            {
+                return NotFound();
+            }
+
+            // Verificar si hay órdenes asociadas a la reserva
+            var hasOrders = await _context.Orden.AnyAsync(o => o.IdReserva == id);
+            if (hasOrders)
+            {
+                // Agregar un mensaje de error al ModelState
+                ModelState.AddModelError("", "No se puede eliminar la reserva porque tiene órdenes asociadas.");
+                return View(reserva); // Devolver la vista con el mensaje de error
+            }
+
+            // Si no hay órdenes asociadas, eliminar la reserva
+            _context.Reservas.Remove(reserva);
+
+            // Actualizar estado de la mesa a Disponible
+            var mesa = await _context.Mesas.FindAsync(reserva.IdMesa);
+            if (mesa != null)
+            {
+                mesa.Estado = "Disponible";
+                _context.Update(mesa);
             }
 
             await _context.SaveChangesAsync();
@@ -277,13 +276,9 @@ namespace Restaurante.Controllers
         // Método para obtener mesas disponibles según la fecha
         public IActionResult GetMesasDisponibles(DateTime fecha)
         {
-            var mesasReservadas = _context.Reservas
-                .Where(r => r.Fecha == DateOnly.FromDateTime(fecha))
-                .Select(r => r.IdMesa)
-                .ToList();
-
             var mesasDisponibles = _context.Mesas
-                .Where(m => !mesasReservadas.Contains(m.Id) && m.Estado == "Disponible")
+                .Where(m => m.Estado == "Disponible" && !_context.Reservas
+                .Any(r => r.Fecha == DateOnly.FromDateTime(fecha) && r.IdMesa == m.Id))
                 .ToList();
 
             return Json(mesasDisponibles);
@@ -309,12 +304,5 @@ namespace Restaurante.Controllers
 
             return Json(new { success = true });
         }
-<<<<<<< HEAD
-        
-=======
-
-
-
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     }
 }

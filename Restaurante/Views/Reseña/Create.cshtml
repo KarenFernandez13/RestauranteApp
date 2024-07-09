@@ -2,70 +2,45 @@
 @model Restaurante.Models.Reseña
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear reseña";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
-@if (User.Identity!.IsAuthenticated)
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
-    <div>
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Producto" asp-action="Index">Productos</a>
-                            </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Orden" asp-action="Index">Ordenes</a>
-                                </li>
-                            
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reserva" asp-action="Index">Reservas</a>
-                                </li>
-                               
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Listas" asp-action="Listas">Listados</a>
-                                </li>
-                           
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Salir">Salir</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    </div>
-}
-
-<h4>Reseña</h4>
+<br />
+<h3 class="bold-text">~ Crear reseña ~</h3>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
+           
             <div class="form-group">
                 <label asp-for="CiCliente" class="control-label"></label>
                 <select asp-for="CiCliente" class ="form-control" asp-items="ViewBag.CiCliente"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="IdSucursal" class="control-label"></label>
-                <select asp-for="IdSucursal" class ="form-control" asp-items="ViewBag.IdSucursal"></select>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="Fecha" class="control-label"></label>
                 <input asp-for="Fecha" class="form-control" />
@@ -80,18 +55,19 @@
                 <label asp-for="Puntaje" class="control-label"></label>
                 <input asp-for="Puntaje" class="form-control" />
                 <span asp-validation-for="Puntaje" class="text-danger"></span>
-            </div>
+                </div><br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Crear" class="custom-btn" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <br />
+    <div>
+        <a class="custom-btn" href="@Url.Action("Index", "Reseña")">Volver</a>
+    </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 }

@@ -15,7 +15,6 @@ namespace Restaurante.Controllers
     public class OrdenController : Controller
     {
         private readonly RestauranteContext _context;
-<<<<<<< HEAD
         private readonly WeatherService _weatherService;
 
         public OrdenController(RestauranteContext context, WeatherService weatherService)
@@ -24,54 +23,25 @@ namespace Restaurante.Controllers
             _weatherService = weatherService;
         }
 
-        private async Task UpdateOrdenTotalAsync(int idOrden)
-        {
-            var orden = await _context.Orden
-                .Include(o => o.OrdenDetalles)
-                .FirstOrDefaultAsync(o => o.Id == idOrden);
+        
 
-            if (orden != null)
-            {
-                orden.Total = orden.OrdenDetalles.Sum(od => od.Cantidad * od.CodigoProdNavigation.Precio);
-                var clima = await _weatherService.GetTemperatureAsync();
-                double descuento = CalculateDiscountPercentage(clima.Temperatura, clima.Descripcion);
-                orden.Total -= orden.Total * descuento / 100;
-            }
-        }
-
-
-=======
-
-        public OrdenController(RestauranteContext context)
-        {
-            _context = context;
-        }
-
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
-        // GET: Orden
-        public async Task<IActionResult> ListaOrdenes()
-        {
-            var restauranteContext = _context.Orden.Include(o => o.IdReservaNavigation).Include(o => o.IdUsuarioNavigation);
-            return View(await restauranteContext.ToListAsync());
-        }
-
+        // GET: Orden    
         public async Task<IActionResult> Index()
         {
             var today = DateOnly.FromDateTime(DateTime.Today);
-            var ordenes = _context.Orden
-                                    .Include(o => o.IdReservaNavigation)
-                                    .ThenInclude(r => r.IdMesaNavigation)
-                                    .Include(o => o.IdReservaNavigation)
-                                    .ThenInclude(r => r.CiClienteNavigation)
-                                     .Where(o => o.IdReservaNavigation.Fecha == today)
-                                        .ToList();
+            var ordenes = await _context.Orden
+              .Include(o => o.IdReservaNavigation)
+                  .ThenInclude(r => r.IdMesaNavigation)
+              .Include(o => o.IdReservaNavigation)
+                  .ThenInclude(r => r.CiClienteNavigation)
+              .Include(o => o.Pagos) 
+              .Where(o => o.IdReservaNavigation.Fecha == today)
+              .ToListAsync();
+
             return View(ordenes);
         }
-<<<<<<< HEAD
 
-=======
         
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 
         // GET: Orden/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -81,21 +51,13 @@ namespace Restaurante.Controllers
                 return BadRequest();
             }
 
-<<<<<<< HEAD
             var orden = await _context.Orden
                 .Include(o => o.IdReservaNavigation)
-                .ThenInclude(r => r.CiClienteNavigation)
+                    .ThenInclude(r => r.CiClienteNavigation)
                 .Include(o => o.IdUsuarioNavigation)
                 .Include(o => o.OrdenDetalles)
-                .ThenInclude(od => od.CodigoProdNavigation)
-=======
-            // Usar FirstOrDefaultAsync para la consulta asincrónica
-            var orden = await _context.Orden
-                .Include(o => o.IdReservaNavigation) // Incluye la navegación de Reserva si es necesario
-                .Include(o => o.IdUsuarioNavigation) // Incluye la navegación de Usuario si es necesario
-                .Include(o => o.OrdenDetalles) // Incluye los detalles de la orden si es necesario
-                .Include(o => o.Pagos) // Incluye los pagos si es necesario
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
+                    .ThenInclude(od => od.CodigoProdNavigation)
+                .Include(o => o.Pagos)
                 .FirstOrDefaultAsync(o => o.Id == id);
 
             if (orden == null)
@@ -103,81 +65,71 @@ namespace Restaurante.Controllers
                 return NotFound();
             }
 
-<<<<<<< HEAD
+            // Obtener el tipo de cliente
+            var tipoCliente = orden.IdReservaNavigation?.CiClienteNavigation?.TipoCliente;
+            if (tipoCliente == null)
+            {
+                return NotFound("Cliente no encontrado para esta orden.");
+            }
+
+            // Actualizar el total de la orden
+            await UpdateOrdenTotalAsync(id.Value);
+
+            // Recargar la orden para obtener el total actualizado
+            orden = await _context.Orden
+                .Include(o => o.IdReservaNavigation)
+                    .ThenInclude(r => r.CiClienteNavigation)
+                .Include(o => o.IdUsuarioNavigation)
+                .Include(o => o.OrdenDetalles)
+                    .ThenInclude(od => od.CodigoProdNavigation)
+                .Include(o => o.Pagos)
+                .FirstOrDefaultAsync(o => o.Id == id);
+
             var clima = await _weatherService.GetTemperatureAsync();
-            var discountPercentage = CalculateDiscountPercentage(clima.Temperatura, clima.Descripcion);
-            orden.Total = orden.OrdenDetalles.Sum(od => od.Cantidad * od.CodigoProdNavigation.Precio);
+            var discountPercentage = CalculateDiscountPercentage(clima.Temperatura, clima.Descripcion, tipoCliente);
             var totalConDescuento = orden.Total - (orden.Total * (double)discountPercentage / 100);
+
             ViewBag.TotalConDescuento = totalConDescuento;
             ViewBag.discountPercentage = discountPercentage;
             return View(orden);
         }
 
-
         // GET: Orden/Create
         public async Task<IActionResult> Create(int idReserva)
         {
-            var reserva = await _context.Reservas.FindAsync(idReserva);
-=======
-            return View(orden);
-        }
-    
+            var reserva = await _context.Reservas
+                .Include(r => r.CiClienteNavigation) 
+                .FirstOrDefaultAsync(r => r.Id == idReserva);
 
-        // GET: Orden/Create
-        public IActionResult Create(int idReserva)
-        {
-
-            var reserva = _context.Reservas.Find(idReserva);
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
             if (reserva == null)
             {
                 return NotFound();
             }
 
-<<<<<<< HEAD
+            // Obtener el clima
             var clima = await _weatherService.GetTemperatureAsync();
-            var discountPercentage = CalculateDiscountPercentage(clima.Temperatura, clima.Descripcion);
 
-=======
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
+            // Obtener el cliente
+            var cliente = reserva.CiClienteNavigation;
+            if (cliente == null)
+            {
+                return NotFound("Cliente no encontrado para esta reserva.");
+            }
+
+            // Calcular el descuento
+            var discountPercentage = CalculateDiscountPercentage(clima.Temperatura, clima.Descripcion, cliente.TipoCliente);
+
             var orden = new Orden
             {
                 IdReserva = idReserva,
                 Estado = "Activa",
                 OrdenDetalles = new List<OrdenDetalle>()
-<<<<<<< HEAD
             };
 
             ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
+            ViewBag.DiscountPercentage = discountPercentage;
             return View(orden);
         }
-        //public IActionResult Create(int idReserva)
-        //{
-        //    var reserva = _context.Reservas.Find(idReserva);
-        //    if (reserva == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var orden = new Orden
-        //    {
-        //        IdReserva = idReserva,
-        //        Estado = "Activa",
-        //        OrdenDetalles = new List<OrdenDetalle>()            Descuento = discountPercentage
-        //    };         
-
-        //    ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
-        //    return View();
-
-        //}
-=======
-            };         
-
-            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
-            return View();
-
-        }
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 
 
         [HttpPost]
@@ -216,8 +168,6 @@ namespace Restaurante.Controllers
         }
 
         // POST: Orden/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Total,Estado,IdUsuario,IdReserva")] Orden orden)
@@ -277,22 +227,32 @@ namespace Restaurante.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var orden = await _context.Orden.FindAsync(id);
-            if (orden != null)
+            var orden = await _context.Orden
+                .Include(o => o.OrdenDetalles)
+                .FirstOrDefaultAsync(o => o.Id == id);
+
+            if (orden == null)
             {
-                _context.Orden.Remove(orden);
+                return NotFound();
             }
+
+            _context.OrdenDetalles.RemoveRange(orden.OrdenDetalles);
+
+            _context.Orden.Remove(orden);
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+         
         }
 
+        //VERIFICAR QUE EXISTE LA ORDEN
         private bool OrdenExists(int id)
         {
             return _context.Orden.Any(e => e.Id == id);
         }
 
 
+        //CHEQUEAR SI EXISTE UNA ORDEN ASOCIADA A UNA RESERVA O NO. EN ESE CASO CREARLA
         public async Task<IActionResult> CheckOrder(int idReserva)
         {
             var ordenExistente = await _context.Orden.FirstOrDefaultAsync(o => o.IdReserva == idReserva);
@@ -305,7 +265,7 @@ namespace Restaurante.Controllers
             return RedirectToAction("Details", new { id = ordenExistente.Id });
         }
 
-
+        //ACTUALIZAR ESTADO DE LA ORDEN
         [HttpPost]
         public IActionResult UpdateStatus(int id, string estado)
         {
@@ -319,10 +279,10 @@ namespace Restaurante.Controllers
             _context.SaveChanges();
 
             return Json(new { success = true });
-<<<<<<< HEAD
         }
 
-        private double CalculateDiscountPercentage(double temperature, string description)
+        //CALCULO DE DESCUENTOS DE UN CLIENTE
+        private double CalculateDiscountPercentage(double temperature, string description, string tipoCliente)
         {
             double discount = 0;
 
@@ -340,12 +300,76 @@ namespace Restaurante.Controllers
                 discount += 5;
             }
 
-            return discount;
+            if (tipoCliente != null)
+            {
+                switch (tipoCliente)
+                {
+                    case "VIP":
+                        discount += 20;
+                        break;
+                    case "Frecuente":
+                        discount += 10;
+                        break;
+                    case "Nuevo":
+                        discount += 5;
+                        break;
+                    default:
+                        discount += 0;
+                        break;
+                }
+            }
+                return discount;
         }
-=======
-        }           
 
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
-    }
+        //ACTUALIZAR TOTALES SEGUN DESCUENTOS A MEDIDA QUE SE AGREGAN PRODUCTOS
+        private async Task UpdateOrdenTotalAsync(int idOrden)
+        {
+            var orden = await _context.Orden
+        .Include(o => o.OrdenDetalles)
+            .ThenInclude(od => od.CodigoProdNavigation)
+        .Include(o => o.IdReservaNavigation)
+            .ThenInclude(r => r.CiClienteNavigation)
+        .FirstOrDefaultAsync(o => o.Id == idOrden);
+
+            if (orden != null)
+            {
+                // Calcular el total de la orden sin descuento
+                orden.Total = orden.OrdenDetalles
+                    .Where(od => od.CodigoProdNavigation != null)
+                    .Sum(od => od.Cantidad * od.CodigoProdNavigation.Precio);
+
+                // Obtener el clima
+                var clima = await _weatherService.GetTemperatureAsync();
+
+                // Obtener el tipo de cliente
+                var tipoCliente = orden.IdReservaNavigation?.CiClienteNavigation?.TipoCliente;
+
+                if (tipoCliente != null)
+                {
+                    // Calcular el descuento total
+                    double descuentoTotal = CalculateDiscountPercentage(clima.Temperatura, clima.Descripcion, tipoCliente);
+
+                    // Aplicar el descuento
+                    orden.Total -= orden.Total * descuentoTotal / 100;
+
+                    // Guardar los cambios
+                    _context.Update(orden);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new InvalidOperationException("Cliente no encontrado para la orden especificada.");
+                }
+            }
+        }
+
+
+        //LISTA DE ORDENES
+        public async Task<IActionResult> ListaOrdenes()
+        {
+            var restauranteContext = _context.Orden.Include(o => o.IdReservaNavigation).Include(o => o.IdUsuarioNavigation);
+            return View(await restauranteContext.ToListAsync());
+        }
+    }             
 }
 

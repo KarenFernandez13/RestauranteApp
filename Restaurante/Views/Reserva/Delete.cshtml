@@ -3,8 +3,6 @@
 @{
     ViewData["Title"] = "Delete";
 }
-<<<<<<< HEAD
-
 <style>
     body {
         font-family: 'Playfair Display', serif;
@@ -40,20 +38,16 @@
         }
 </style>
 
-<br/>
-<h3>~ Eliminar Reserva ~</h3>
-=======
-<hr/>
-<h3>Eliminar</h3>
-<h3>Reserva</h3>
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
-<hr/>
-<div>        
+<br />
+<h3 class="bold-text">~ Eliminar Reserva ~</h3>
+<hr />
+<br />
+<div>
     <dl class="row">
-        <dt class = "col-sm-2">
-            Fecha: 
+        <dt class="col-sm-2">
+            Fecha:
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Fecha)
         </dd>
         <dt class="col-sm-2">
@@ -62,43 +56,43 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Hora)
         </dd>
-        <dt class = "col-sm-2">
-           Estado: 
+        <dt class="col-sm-2">
+            Estado:
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Estado)
-        </dd>      
-        <dt class = "col-sm-2">
-            Cliente: 
+        </dd>
+        <dt class="col-sm-2">
+            Cliente:
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CiClienteNavigation.Ci)
         </dd>
-        <dt class = "col-sm-2">
-            Mesa: 
+        <dt class="col-sm-2">
+            Numero Mesa:
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdMesaNavigation.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdMesaNavigation.Numero)
         </dd>
     </dl>
-<<<<<<< HEAD
-    <br/>
+</div>
+<br />
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+<div>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Eliminar" class="btn-delete" />
     </form>
-    <br />
-    <div>
-        <a class="custom-btn" href="@Url.Action("Index", "Reserva")">Volver</a>
-=======
-    <hr/>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" />        
-    </form>
-    <hr />
-    <div>
-        <a class="btn btn-primary" href="@Url.Action("Index", "Reserva")">Volver</a>
->>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
-    </div>
+</div>
+<br />
+<div>
+    <a class="custom-btn" href="@Url.Action("Index", "Reserva")">Volver</a>
 </div>

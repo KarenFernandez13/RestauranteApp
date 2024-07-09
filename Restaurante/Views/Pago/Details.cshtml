@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
 <h1>Details</h1>
 
 <div>
@@ -70,3 +71,4 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+}
