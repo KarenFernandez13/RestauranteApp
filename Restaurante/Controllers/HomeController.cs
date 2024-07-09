@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Restaurante.Models;
 using System.Diagnostics;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +16,7 @@ namespace Restaurante.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+<<<<<<< HEAD
         private readonly WeatherService _weatherService;
 
         public HomeController(ILogger<HomeController> logger, WeatherService weatherService)
@@ -61,6 +67,20 @@ namespace Restaurante.Controllers
 
             return discount;
         }
+=======
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

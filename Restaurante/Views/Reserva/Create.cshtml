@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Create";
 }
+<<<<<<< HEAD
 
 <style>
     body {
@@ -22,6 +23,8 @@
 
 </style>
 
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
 <div>
@@ -64,9 +67,15 @@
         </nav>
     </header>
 </div>
+<<<<<<< HEAD
 <br />
     <h3 class="bold-text">~ Nueva Reserva ~</h3>
 <br>
+=======
+<hr />
+<h3>Nueva</h3>
+<h3>Reserva</h3>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -104,15 +113,26 @@
             </div>        
             <br/>
             <div class="form-group">
+<<<<<<< HEAD
                     <input type="submit" value="Guardar" class="custom-btn" />
+=======
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
             </div>
         </form>
     </div>
 </div>
+<<<<<<< HEAD
 <br/>
     <div>
         <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
     </div>
+=======
+<hr/>
+<div>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Producto")">Volver</a>
+</div>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 
     @section Scripts {
     @{

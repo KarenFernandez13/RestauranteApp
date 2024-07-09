@@ -18,7 +18,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+<<<<<<< HEAD
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
   </ItemGroup>
 
 </Project>

@@ -757,6 +757,7 @@ C:\Users\usuario\OneDrive\Escritorio\prog III\obligatorio\sistema\RestauranteApp
 C:\Users\usuario\OneDrive\Escritorio\prog III\obligatorio\sistema\RestauranteApp\Restaurante\obj\Debug\net8.0\Restaurante.pdb
 C:\Users\usuario\OneDrive\Escritorio\prog III\obligatorio\sistema\RestauranteApp\Restaurante\obj\Debug\net8.0\Restaurante.genruntimeconfig.cache
 C:\Users\usuario\OneDrive\Escritorio\prog III\obligatorio\sistema\RestauranteApp\Restaurante\obj\Debug\net8.0\ref\Restaurante.dll
+<<<<<<< HEAD
 C:\Users\Usuario\Documents\RestauranteApp\Restaurante\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Usuario\Documents\RestauranteApp\Restaurante\bin\Debug\net8.0\appsettings.json
 C:\Users\Usuario\Documents\RestauranteApp\Restaurante\bin\Debug\net8.0\Restaurante.staticwebassets.runtime.json
@@ -1010,3 +1011,5 @@ C:\Users\Usuario\Documents\RestauranteApp\Restaurante\obj\Debug\net8.0\Restauran
 C:\Users\Usuario\Documents\RestauranteApp\Restaurante\obj\Debug\net8.0\Restaurante.genruntimeconfig.cache
 C:\Users\Usuario\Documents\RestauranteApp\Restaurante\obj\Debug\net8.0\ref\Restaurante.dll
 C:\Users\Usuario\Documents\RestauranteApp\Restaurante\obj\Debug\net8.0\Restaurante.sourcelink.json
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2

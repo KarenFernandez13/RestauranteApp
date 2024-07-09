@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<<<<<<< HEAD
 
 <style>
     body {
@@ -41,6 +42,11 @@
 
 <br/>
 <h3>~ Eliminar Reserva ~</h3>
+=======
+<hr/>
+<h3>Eliminar</h3>
+<h3>Reserva</h3>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 <hr/>
 <div>        
     <dl class="row">
@@ -75,6 +81,7 @@
             @Html.DisplayFor(model => model.IdMesaNavigation.Id)
         </dd>
     </dl>
+<<<<<<< HEAD
     <br/>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
@@ -83,5 +90,15 @@
     <br />
     <div>
         <a class="custom-btn" href="@Url.Action("Index", "Reserva")">Volver</a>
+=======
+    <hr/>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" />        
+    </form>
+    <hr />
+    <div>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Reserva")">Volver</a>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     </div>
 </div>

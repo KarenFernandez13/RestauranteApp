@@ -2031,6 +2031,7 @@
           "lib/netstandard2.0/NuGet.Versioning.dll": {}
         }
       },
+<<<<<<< HEAD
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
         "type": "package",
         "runtimeTargets": {
@@ -2189,6 +2190,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.CodeDom/5.0.0": {
         "type": "package",
         "compile": {
@@ -2202,6 +2205,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.Collections/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2238,6 +2242,8 @@
           "lib/netstandard1.3/System.Collections.Concurrent.dll": {}
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Collections.Immutable/7.0.0": {
         "type": "package",
         "compile": {
@@ -2394,6 +2400,7 @@
           "lib/netstandard2.0/System.Data.DataSetExtensions.dll": {}
         }
       },
+<<<<<<< HEAD
       "System.Diagnostics.Debug/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2407,6 +2414,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Diagnostics.DiagnosticSource/6.0.1": {
         "type": "package",
         "dependencies": {
@@ -2452,6 +2461,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.Diagnostics.Tracing/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2465,6 +2475,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Drawing.Common/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -2506,6 +2518,7 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+<<<<<<< HEAD
       "System.Globalization/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2559,6 +2572,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.IdentityModel.Tokens.Jwt/6.35.0": {
         "type": "package",
         "dependencies": {
@@ -2576,6 +2591,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.IO/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2609,6 +2625,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.IO.FileSystem.AccessControl/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -2632,6 +2650,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.IO.FileSystem.Primitives/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2646,6 +2665,8 @@
           "lib/netstandard1.3/System.IO.FileSystem.Primitives.dll": {}
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.IO.Pipelines/7.0.0": {
         "type": "package",
         "compile": {
@@ -2662,6 +2683,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+<<<<<<< HEAD
       "System.Linq/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2680,6 +2702,8 @@
           "lib/netstandard1.6/System.Linq.dll": {}
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Memory/4.5.4": {
         "type": "package",
         "compile": {
@@ -2706,6 +2730,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.Net.Http/4.3.4": {
         "type": "package",
         "dependencies": {
@@ -2764,6 +2789,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Numerics.Vectors/4.5.0": {
         "type": "package",
         "compile": {
@@ -2773,6 +2800,7 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
+<<<<<<< HEAD
       "System.Reflection/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2788,6 +2816,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Reflection.Metadata/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -2827,6 +2857,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+<<<<<<< HEAD
       "System.Reflection.Primitives/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2855,6 +2886,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Runtime/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2908,6 +2941,7 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+<<<<<<< HEAD
       "System.Runtime.Extensions/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2965,6 +2999,8 @@
           "lib/netstandard1.3/System.Runtime.Numerics.dll": {}
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Security.AccessControl/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -2988,6 +3024,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.Security.Cryptography.Algorithms/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3024,6 +3061,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Security.Cryptography.Cng/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -3046,6 +3085,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.Security.Cryptography.Csp/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3139,6 +3179,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Security.Cryptography.Pkcs/6.0.4": {
         "type": "package",
         "dependencies": {
@@ -3164,6 +3206,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.Security.Cryptography.Primitives/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3182,6 +3225,8 @@
           "lib/netstandard1.3/System.Security.Cryptography.Primitives.dll": {}
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Security.Cryptography.ProtectedData/7.0.0": {
         "type": "package",
         "compile": {
@@ -3204,6 +3249,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.Security.Cryptography.X509Certificates/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3249,6 +3295,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Security.Permissions/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -3370,6 +3418,7 @@
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
       },
+<<<<<<< HEAD
       "System.Threading/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3385,6 +3434,8 @@
           "lib/netstandard1.3/System.Threading.dll": {}
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Threading.Channels/7.0.0": {
         "type": "package",
         "compile": {
@@ -3401,6 +3452,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+<<<<<<< HEAD
       "System.Threading.Tasks/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3414,6 +3466,8 @@
           }
         }
       },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "System.Threading.Tasks.Dataflow/7.0.0": {
         "type": "package",
         "compile": {
@@ -7163,6 +7217,7 @@
         "nuget.versioning.nuspec"
       ]
     },
+<<<<<<< HEAD
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
       "sha512": "7VSGO0URRKoMEAq0Sc9cRz8mb6zbyx/BZDEWhgPdzzpmFhkam3fJ1DAGWFXBI4nGlma+uPKpfuMQP5LXRnOH5g==",
       "type": "package",
@@ -7373,6 +7428,8 @@
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.CodeDom/5.0.0": {
       "sha512": "JPJArwA1kdj8qDAkY2XGjSWoYnqiM7q/3yRNkt6n28Mnn95MuEGkZXUbPBf7qc3IjwrGY5ttQon7yqHZyQJmOQ==",
       "type": "package",
@@ -7397,6 +7454,7 @@
         "version.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Collections/4.3.0": {
       "sha512": "3Dcj85/TBdVpL5Zr+gEEBUuFe2icOnLalmEh9hfck1PTYbbyWuZgh4fmm2ysCLTrqLQw6t3TgTyJ+VLp+Qb+Lw==",
       "type": "package",
@@ -7533,6 +7591,8 @@
         "system.collections.concurrent.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Collections.Immutable/7.0.0": {
       "sha512": "dQPcs0U1IKnBdRDBkrCTi1FoajSTBzLcVTpjO4MBCMC7f4pDOIPzgBoX8JjG7X6uZRJ8EBxsi8+DR1JuwjnzOQ==",
       "type": "package",
@@ -7764,6 +7824,7 @@
         "version.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Diagnostics.Debug/4.3.0": {
       "sha512": "ZUhUOdqmaG5Jk3Xdb8xi5kIyQYAA4PnTNlHx1mu9ZY3qv4ELIdKbnL/akbGaKi2RnNUWaZsAs31rvzFdewTj2g==",
       "type": "package",
@@ -7832,6 +7893,8 @@
         "system.diagnostics.debug.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Diagnostics.DiagnosticSource/6.0.1": {
       "sha512": "KiLYDu2k2J82Q9BJpWiuQqCkFjRBWVq4jDzKKWawVi9KWzyD0XG3cmfX0vqTQlL14Wi9EufJrbL0+KCLTbqWiQ==",
       "type": "package",
@@ -7890,6 +7953,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Diagnostics.Tracing/4.3.0": {
       "sha512": "rswfv0f/Cqkh78rA5S8eN8Neocz234+emGCtTF3lxPY96F+mmmUen6tbn0glN6PMvlKQb9bPAY5e9u7fgPTkKw==",
       "type": "package",
@@ -7980,6 +8044,8 @@
         "system.diagnostics.tracing.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Drawing.Common/7.0.0": {
       "sha512": "KIX+oBU38pxkKPxvLcLfIkOV5Ien8ReN78wro7OF5/erwcmortzeFx+iBswlh2Vz6gVne0khocQudGwaO1Ey6A==",
       "type": "package",
@@ -8040,6 +8106,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Globalization/4.3.0": {
       "sha512": "kYdVd2f2PAdFGblzFswE4hkNANJBKRmsfa2X5LG2AcWE1c7/4t0pYae1L8vfZ5xvE2nK/R9JprtToA61OSHWIg==",
       "type": "package",
@@ -8187,6 +8254,8 @@
         "system.globalization.extensions.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.IdentityModel.Tokens.Jwt/6.35.0": {
       "sha512": "yxGIQd3BFK7F6S62/7RdZk3C/mfwyVxvh6ngd1VYMBmbJ1YZZA9+Ku6suylVtso0FjI0wbElpJ0d27CdsyLpBQ==",
       "type": "package",
@@ -8210,6 +8279,7 @@
         "system.identitymodel.tokens.jwt.nuspec"
       ]
     },
+<<<<<<< HEAD
     "System.IO/4.3.0": {
       "sha512": "3qjaHvxQPDpSOYICjUoTsmoq5u6QJAFRUITgeT/4gqkF1bajbSmb1kwSxEA8AHlofqgcKJcM8udgieRNhaJ5Cg==",
       "type": "package",
@@ -8329,6 +8399,8 @@
         "system.io.filesystem.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.IO.FileSystem.AccessControl/5.0.0": {
       "sha512": "SxHB3nuNrpptVk+vZ/F+7OHEpoHUIKKMl02bUmYHQr1r+glbZQxs7pRtsf4ENO29TVm2TH3AEeep2fJcy92oYw==",
       "type": "package",
@@ -8373,6 +8445,7 @@
         "version.txt"
       ]
     },
+<<<<<<< HEAD
     "System.IO.FileSystem.Primitives/4.3.0": {
       "sha512": "6QOb2XFLch7bEc4lIcJH49nJN2HV+OC3fHDgsLVsBVBk3Y4hFAnOBGzJ2lUu7CyDDFo9IBWkSsnbkT6IBwwiMw==",
       "type": "package",
@@ -8412,6 +8485,8 @@
         "system.io.filesystem.primitives.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.IO.Pipelines/7.0.0": {
       "sha512": "jRn6JYnNPW6xgQazROBLSfpdoczRw694vO5kKvMcNnpXuolEixUyw6IBuBs2Y2mlSX/LdLvyyWmfXhaI3ND1Yg==",
       "type": "package",
@@ -8439,6 +8514,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Linq/4.3.0": {
       "sha512": "5DbqIUpsDp0dFftytzuMmc0oeMdQwjcP/EWxsksIz/w1TcFRkZ3yKKz0PqiYFMmEwPSWw+qNVqD7PJ889JzHbw==",
       "type": "package",
@@ -8511,6 +8587,8 @@
         "system.linq.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Memory/4.5.4": {
       "sha512": "1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
       "type": "package",
@@ -8552,6 +8630,7 @@
         "system.memory.data.nuspec"
       ]
     },
+<<<<<<< HEAD
     "System.Net.Http/4.3.4": {
       "sha512": "aOa2d51SEbmM+H+Csw7yJOuNZoHkrP2XnAurye5HWYgGVVU54YZDvsLUYRv6h18X3sPnjNCANmN7ZhIPiqMcjA==",
       "type": "package",
@@ -8673,6 +8752,8 @@
         "system.net.primitives.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Numerics.Vectors/4.5.0": {
       "sha512": "QQTlPTl06J/iiDbJCiepZ4H//BVraReU4O4EoRw1U02H5TLUIT7xn3GnDp9AXPSlJUDyFs4uWjWafNX6WrAojQ==",
       "type": "package",
@@ -8720,6 +8801,7 @@
         "version.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Reflection/4.3.0": {
       "sha512": "KMiAFoW7MfJGa9nDFNcfu+FpEdiHpWgTcS2HdMpDvt9saK3y/G4GwprPyzqjFH9NTaGPQeWNHU+iDlDILj96aQ==",
       "type": "package",
@@ -8801,6 +8883,8 @@
         "system.reflection.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Reflection.Metadata/7.0.0": {
       "sha512": "MclTG61lsD9sYdpNz9xsKBzjsmsfCtcMZYXz/IUr2zlhaTaABonlr1ESeompTgM+Xk+IwtGYU7/voh3YWB/fWw==",
       "type": "package",
@@ -8857,6 +8941,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Reflection.Primitives/4.3.0": {
       "sha512": "5RXItQz5As4xN2/YUDxdpsEkMhvw3e6aNveFXUn4Hl/udNTCNhnKp8lT9fnc3MhvGKh1baak5CovpuQUXHAlIA==",
       "type": "package",
@@ -8971,6 +9056,8 @@
         "system.resources.resourcemanager.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Runtime/4.3.0": {
       "sha512": "JufQi0vPQ0xGnAczR13AUFglDyVYt4Kqnz1AZaiKZ5+GICq0/1MH/mO/eAJHt/mHW1zjKBJd7kV26SrxddAhiw==",
       "type": "package",
@@ -9125,6 +9212,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Runtime.Extensions/4.3.0": {
       "sha512": "guW0uK0fn5fcJJ1tJVXYd7/1h5F+pea1r7FLSOz/f8vPEqbR2ZAknuRDvTQ8PzAilDveOxNjSfr0CHfIQfFk8g==",
       "type": "package",
@@ -9394,6 +9482,8 @@
         "system.runtime.numerics.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Security.AccessControl/5.0.0": {
       "sha512": "dagJ1mHZO3Ani8GH0PHpPEe/oYO+rVdbQjvjJkBRNQkX4t0r1iaeGn8+/ybkSLEan3/slM0t59SVdHzuHf2jmw==",
       "type": "package",
@@ -9441,6 +9531,7 @@
         "version.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Security.Cryptography.Algorithms/4.3.0": {
       "sha512": "W1kd2Y8mYSCgc3ULTAZ0hOP2dSdG5YauTb1089T0/kRcN2MpSAW1izOFROrJgxSlMn3ArsgHXagigyi+ibhevg==",
       "type": "package",
@@ -9482,6 +9573,8 @@
         "system.security.cryptography.algorithms.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Security.Cryptography.Cng/5.0.0": {
       "sha512": "jIMXsKn94T9JY7PvPq/tMfqa6GAaHpElRDpmG+SuL+D3+sTw2M8VhnibKnN8Tq+4JqbPJ/f+BwtLeDMEnzAvRg==",
       "type": "package",
@@ -9563,6 +9656,7 @@
         "version.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Security.Cryptography.Csp/4.3.0": {
       "sha512": "X4s/FCkEUnRGnwR3aSfVIkldBmtURMhmexALNTwpjklzxWU7yjMk7GHLKOZTNkgnWnE0q7+BCf9N2LVRWxewaA==",
       "type": "package",
@@ -9652,6 +9746,8 @@
         "system.security.cryptography.openssl.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Security.Cryptography.Pkcs/6.0.4": {
       "sha512": "LGbXi1oUJ9QgCNGXRO9ndzBL/GZgANcsURpMhNR8uO+rca47SZmciS3RSQUvlQRwK3QHZSHNOXzoMUASKA+Anw==",
       "type": "package",
@@ -9689,6 +9785,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Security.Cryptography.Primitives/4.3.0": {
       "sha512": "7bDIyVFNL/xKeFHjhobUAQqSpJq9YTOpbEs6mR233Et01STBMXNAc/V+BM6dwYGc95gVh/Zf+iVXWzj3mE8DWg==",
       "type": "package",
@@ -9718,6 +9815,8 @@
         "system.security.cryptography.primitives.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Security.Cryptography.ProtectedData/7.0.0": {
       "sha512": "xSPiLNlHT6wAHtugASbKAJwV5GVqQK351crnILAucUioFqqieDN79evO1rku1ckt/GfjIn+b17UaSskoY03JuA==",
       "type": "package",
@@ -9755,6 +9854,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Security.Cryptography.X509Certificates/4.3.0": {
       "sha512": "t2Tmu6Y2NtJ2um0RtcuhP7ZdNNxXEgUm2JeoA/0NvlMjAhKCnM1NX07TDl3244mVp3QU6LPEhT3HTtH1uF7IYw==",
       "type": "package",
@@ -9811,6 +9911,8 @@
         "system.security.cryptography.x509certificates.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Security.Permissions/7.0.0": {
       "sha512": "Vmp0iRmCEno9BWiskOW5pxJ3d9n+jUqKxvX4GhLwFhnQaySZmBN2FuC0N5gjFHgyFMUjC5sfIJ8KZfoJwkcMmA==",
       "type": "package",
@@ -10108,6 +10210,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Threading/4.3.0": {
       "sha512": "VkUS0kOBcUf3Wwm0TSbrevDDZ6BlM+b/HRiapRFWjM5O0NS0LviG0glKmFK+hhPDd1XFeSdU1GmlLhb2CoVpIw==",
       "type": "package",
@@ -10179,6 +10282,8 @@
         "system.threading.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Threading.Channels/7.0.0": {
       "sha512": "qmeeYNROMsONF6ndEZcIQ+VxR4Q/TX/7uIVLJqtwIWL7dDWeh0l1UIqgo4wYyjG//5lUNhwkLDSFl+pAWO6oiA==",
       "type": "package",
@@ -10208,6 +10313,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
     "System.Threading.Tasks/4.3.0": {
       "sha512": "LbSxKEdOUhVe8BezB/9uOGGppt+nZf6e1VFyw6v3DN6lqitm0OSn2uXMOdtP0M3W4iMcqcivm2J6UgqiwwnXiA==",
       "type": "package",
@@ -10276,6 +10382,8 @@
         "system.threading.tasks.nuspec"
       ]
     },
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "System.Threading.Tasks.Dataflow/7.0.0": {
       "sha512": "BmSJ4b0e2nlplV/RdWVxvH7WECTHACofv06dx/JwOYc0n56eK1jIWdQKNYYsReSO4w8n1QA5stOzSQcfaVBkJg==",
       "type": "package",
@@ -10372,28 +10480,48 @@
       "Microsoft.EntityFrameworkCore.Design >= 8.0.6",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.6",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.6",
+<<<<<<< HEAD
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.2",
       "System.Net.Http >= 4.3.4"
     ]
   },
   "packageFolders": {
     "C:\\Users\\Usuario\\.nuget\\packages\\": {},
+=======
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.2"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\usuario\\.nuget\\packages\\": {},
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Usuario\\Documents\\RestauranteApp\\Restaurante\\Restaurante.csproj",
       "projectName": "Restaurante",
       "projectPath": "C:\\Users\\Usuario\\Documents\\RestauranteApp\\Restaurante\\Restaurante.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Usuario\\Documents\\RestauranteApp\\Restaurante\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\Restaurante.csproj",
+      "projectName": "Restaurante",
+      "projectPath": "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\Restaurante.csproj",
+      "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\usuario\\OneDrive\\Escritorio\\prog III\\obligatorio\\sistema\\RestauranteApp\\Restaurante\\obj\\",
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -10402,7 +10530,10 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
         "C:\\Program Files\\dotnet\\library-packs": {},
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -10449,10 +10580,13 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[8.0.2, )"
+<<<<<<< HEAD
           },
           "System.Net.Http": {
             "target": "Package",
             "version": "[4.3.4, )"
+=======
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
           }
         },
         "imports": [

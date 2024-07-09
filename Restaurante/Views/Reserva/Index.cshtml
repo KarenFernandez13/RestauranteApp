@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@model IEnumerable<Restaurante.Models.Reserva>
 
 @{
@@ -6,6 +7,14 @@
 }
 
 
+=======
+﻿
+@model IEnumerable<Restaurante.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Index";
+}
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
 
@@ -63,6 +72,7 @@
         .bold-text {
             font-weight: bold;
         }
+<<<<<<< HEAD
 
         .date-input {
             width: 150px;
@@ -73,6 +83,12 @@
     <br />
     <h3 class="bold-text">~ Reservas ~</h3>      
     <hr />
+=======
+    </style>
+
+    <br />
+    <h3 class="bold-text">Reservas</h3>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     <br />
     <div button-container>
         <a class="custom-btn" href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
@@ -80,11 +96,16 @@
     <br />
     <br />
     <div>
+<<<<<<< HEAD
         <h5 class="bold-text">Buscar por fecha</h5>
+=======
+        <h5>Buscar por fecha</h5>
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
         <form method="get" action="@Url.Action("Index", "Reserva")" class="form-inline">
             <div>
                 <div class="form-group">
                     <label for="startDate">Desde:  </label>
+<<<<<<< HEAD
                     <input type="date" name="startDate" class="form-control date-input" />
                 </div>
                 <br />
@@ -94,6 +115,16 @@
                 </div>
             </div>
             <br />
+=======
+                    <input type="date" name="startDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="endDate">Hasta:  </label>
+                    <input type="date" name="endDate" class="form-control" />
+                </div>
+            </div>
+            
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
             <button type="submit" class="custom-btn">Buscar</button>
         </form>
     </div>
@@ -133,7 +164,11 @@
                         <td>
                             <div class="dropdown">
                                 <button class="custom-btn dropdown-toggle" type="button" id="dropdownMenuButton"
+<<<<<<< HEAD
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+=======
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
                                     Opciones
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -152,8 +187,13 @@
         </table>
     }
 
+<<<<<<< HEAD
 }
 @section Scripts {
+=======
+
+    @section Scripts {
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
     <script>
         $(document).ready(function () {
             $('.change-status-btn').on('click', function () {
@@ -186,7 +226,14 @@
         });
     </script>
     }
+<<<<<<< HEAD
 <br />
 <div>
     <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
 </div>
+=======
+    <div>
+        <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
+    </div>
+}
+>>>>>>> cc0ce3aea1527563f64bae33cea5b5c05b7261a2
