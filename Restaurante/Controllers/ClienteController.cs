@@ -159,5 +159,25 @@ namespace Restaurante.Controllers
         {
             return _context.Clientes.Any(e => e.Ci == id);
         }
+
+        // GET: Cliente/Search
+        public async Task<IActionResult> Search(int? clienteId)
+        {
+            if (clienteId == null)
+            {
+                return BadRequest();
+            }
+
+            var cliente = await _context.Clientes
+                .Where(c => c.Ci == clienteId)
+                .ToListAsync();
+
+            if (cliente == null || !cliente.Any())
+            {
+                return NotFound();
+            }
+
+            return View("Index", cliente); 
+        }
     }
 }

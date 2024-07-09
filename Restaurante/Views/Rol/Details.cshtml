@@ -1,11 +1,36 @@
 ﻿@model Restaurante.Models.Rol
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles de rol";
 }
 
-<h1>Details</h1>
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+<br />
+<h3 class="bold-text">~ Detalles ~</h3>
+<hr />
+<br />
 <div>
     <h4>Rol</h4>
     <hr />
@@ -18,7 +43,10 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    
+         <br />
+        <div>
+            <a class="custom-btn" href="@Url.Action("Index", "Rol")">Volver</a>
+        </div>
+
+}

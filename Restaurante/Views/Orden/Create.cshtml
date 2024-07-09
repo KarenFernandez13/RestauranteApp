@@ -22,8 +22,14 @@
         }
     </style>
     <br />
+
+    <h3 class="bold-text">~ Nueva orden ~</h3>
+    <br />
+    <hr />
+
     <h3 class="bold-text">Nueva orden</h3>
     <br />
+
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Create">
@@ -32,15 +38,18 @@
                     <input asp-for="IdReserva" class="form-control" readonly />
                     <span asp-validation-for="IdReserva" class="text-danger"></span>
                 </div>
-                <input type="hidden" asp-for="IdUsuario" />        
+
+                <input type="hidden" asp-for="IdUsuario" />    
+                <br />
                 <div class="form-group">
-                    <input type="submit" value="Create" class="custom-btn" />
+                    <input type="submit" value="Crear" class="custom-btn" />
                 </div>
             </form>
         </div>
     </div>
+    <br />
+    <br />
     <hr />
-
     <div>
         <a class="custom-btn" href="@Url.Action("Index", "Orden")">Volver</a>
     </div>

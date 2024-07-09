@@ -3,16 +3,51 @@
 @{
     ViewData["Title"] = "Delete";
 }
-<hr/>
-<h3>Eliminar</h3>
-<h3>Reserva</h3>
-<hr/>
-<div>        
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .btn-delete {
+        background-color: lightslategrey;
+        color: black;
+        border: 1px solid #b85f33;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-weight: bold;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .btn-delete:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #333;
+            border-color: #b85f33;
+        }
+</style>
+
+<br />
+<h3 class="bold-text">~ Eliminar Reserva ~</h3>
+<hr />
+<br />
+<div>
     <dl class="row">
-        <dt class = "col-sm-2">
-            Fecha: 
+        <dt class="col-sm-2">
+            Fecha:
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Fecha)
         </dd>
         <dt class="col-sm-2">
@@ -21,32 +56,43 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Hora)
         </dd>
-        <dt class = "col-sm-2">
-           Estado: 
+        <dt class="col-sm-2">
+            Estado:
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Estado)
-        </dd>      
-        <dt class = "col-sm-2">
-            Cliente: 
+        </dd>
+        <dt class="col-sm-2">
+            Cliente:
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CiClienteNavigation.Ci)
         </dd>
-        <dt class = "col-sm-2">
-            Mesa: 
+        <dt class="col-sm-2">
+            Numero Mesa:
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdMesaNavigation.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdMesaNavigation.Numero)
         </dd>
     </dl>
-    <hr/>
+</div>
+<br />
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+<div>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" />        
+        <input type="submit" value="Eliminar" class="btn-delete" />
     </form>
-    <hr />
-    <div>
-        <a class="btn btn-primary" href="@Url.Action("Index", "Reserva")">Volver</a>
-    </div>
+</div>
+<br />
+<div>
+    <a class="custom-btn" href="@Url.Action("Index", "Reserva")">Volver</a>
 </div>

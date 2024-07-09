@@ -1,9 +1,30 @@
-﻿
 @model IEnumerable<Restaurante.Models.Reserva>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Reservas";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
 
@@ -46,28 +67,12 @@
             </nav>
         </header>
     </div>
-    <style>
-        body {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-        }
-
-        .centered-text {
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .bold-text {
-            font-weight: bold;
-        }
-    </style>
-
     <br />
-    <h3 class="bold-text">Reservas</h3>
+    <h3 class="bold-text">~ Reservas ~</h3>
+    <hr />
     <br />
-    <div button-container>
-        <a class="custom-btn" href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
+    <div button-container class="">
+        <a class="custom-btn " href="@Url.Action("Create", "Reserva")">Crear Nueva Reserva</a>
     </div>
     <br />
     <br />
@@ -77,17 +82,20 @@
             <div>
                 <div class="form-group">
                     <label for="startDate">Desde:  </label>
-                    <input type="date" name="startDate" class="form-control" />
+                    <input type="date" name="startDate" class="form-control date-input" />
                 </div>
+                <br />
                 <div class="form-group">
                     <label for="endDate">Hasta:  </label>
-                    <input type="date" name="endDate" class="form-control" />
+                    <input type="date" name="endDate" class="form-control date-input" />
                 </div>
-            </div>
-            
-            <button type="submit" class="custom-btn">Buscar</button>
+            </div>         
         </form>
     </div>
+    <br />
+    <div>
+        <button type="submit" class="custom-btn">Buscar</button>
+    </div>    
     <br />
     @if (Model != null && Model.Any())
     {
@@ -98,9 +106,7 @@
                     <th>Hora</th>
                     <th>Mesa</th>
                     <th>Ci Cliente</th>
-                    <th>Estado</th>
-                    <th></th>
-                    <th></th>
+                    <th>Estado</th>                    
                     <th>Orden</th>
                 </tr>
             </thead>
@@ -124,8 +130,8 @@
                         <td>
                             <div class="dropdown">
                                 <button class="custom-btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Opciones
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Opciones                                   
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.Id })">Editar</a>
@@ -142,9 +148,10 @@
             </tbody>
         </table>
     }
-
-
-    @section Scripts {
+    <br />
+    
+}
+@section Scripts {
     <script>
         $(document).ready(function () {
             $('.change-status-btn').on('click', function () {
@@ -176,8 +183,4 @@
             });
         });
     </script>
-    }
-    <div>
-        <a class="custom-btn" href="@Url.Action("Index", "Producto")">Volver</a>
-    </div>
 }

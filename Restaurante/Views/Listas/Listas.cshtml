@@ -1,6 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Listas";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
     <div>
@@ -43,24 +64,29 @@
             </nav>
         </header>
     </div>
-
-    <div class="text-center">
-        <a href="@Url.Action("ListaOrdenes", "Orden")" class="btn btn-primary">Lista de ordenes</a>
-    </div>
+    <br />
     <br />
     <div class="text-center">
-        <a href="@Url.Action("ListaClientes", "Cliente")" class="btn btn-primary">Lista de clientes</a>
+        <a href="@Url.Action("ListaOrdenes", "Orden")" class="custom-btn">Lista de ordenes</a>
     </div>
     <br />
-    <div class="text-center">
-        <a href="@Url.Action("Create", "Producto")" class="btn btn-primary">Agregar Producto</a>
-    </div>
     <br />
     <div class="text-center">
-        <a href="@Url.Action("Create", "Rol")" class="btn btn-primary">Crear nuevo Rol</a>
+        <a href="@Url.Action("ListaClientes", "Cliente")" class="custom-btn">Lista de clientes</a>
     </div>
     <br />
+    <br />
     <div class="text-center">
-        <a href="@Url.Action("Create", "Permiso")" class="btn btn-primary">Crear nuevo Permiso</a>
+        <a href="@Url.Action("Create", "Producto")" class="custom-btn">Agregar producto</a>
+    </div>
+    <br />
+    <br />
+    <div class="text-center">
+        <a href="@Url.Action("Index", "Rol")" class="custom-btn">Roles</a>
+    </div>
+    <br />
+    <br />
+    <div class="text-center">
+        <a href="@Url.Action("Index", "Permiso")" class="custom-btn">Permisos</a>
     </div>
 }

@@ -1,13 +1,35 @@
 ﻿@model Restaurante.Models.Permiso
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar permiso";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
-<h1>Edit</h1>
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
 
-<h4>Permiso</h4>
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+<br />
+<h3 class="bold-text">~ Permisos ~</h3>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -22,18 +44,20 @@
                 <label asp-for="Roles" class="control-label"></label>
                 <select asp-for="Roles" class="form-control" asp-items="ViewBag.IdRol"></select>
                 <span asp-validation-for="Roles" class="text-danger"></span>
-            </div>
+                </div>
+                <br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Guardar" class="custom-btn" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <br />
+    <div>
+        <a class="custom-btn" href="@Url.Action("Index", "Permiso")">Volver</a>
+    </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 }
