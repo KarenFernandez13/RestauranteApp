@@ -4,7 +4,22 @@
     ViewData["Title"] = "Mesas";
     var fecha = ViewData["Fecha"] as string ?? DateTime.Today.ToString("yyyy-MM-dd");
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
     <div>
@@ -47,16 +62,22 @@
             </nav>
         </header>
     </div>
-
-    <div>
-        <form method="get" action="@Url.Action("Index", "Mesa")" class="form-inline">
+    
+    <h3 class="bold-text">~ Mesas ~</h3>
+    <div>                                  
+    <h5>Buscar por fecha</h5>
+    <form method="get" action="@Url.Action("Index", "Mesa")" class="form-inline">
+        <div>
             <div class="form-group">
-                <label for="fecha">Fecha: </label>
-                <input type="date" name="fecha" class="form-control" value="@fecha" />
+                <label for="startDate">Fecha:  </label>
+                <input type="date" name="fecha" class="form-control date-input" />
             </div>
-            <button type="submit" class="custom-btn">Buscar</button>
-        </form>
-    </div>
+        </div>
+    </form>
+     </div>
+    <br />
+    <button type="submit" class="custom-btn">Buscar</button>
+  
 
 <table class="table">
     <thead>

@@ -13,10 +13,12 @@ public partial class Pago
 
     public double Monto { get; set; }
 
+    [RegularExpression(@"^(UYU|USD|EUR)$", ErrorMessage = "Debe seleccionar una moneda")]
     public string Moneda { get; set; } = null!;
 
     public DateOnly Fecha { get; set; }
 
+    [RegularExpression(@"^(Tarjeta|Efectivo|)$", ErrorMessage = "Debe seleccionar una forma de pago")]
     public string Metodo { get; set; } = null!;
 
     public int? IdOrden { get; set; }

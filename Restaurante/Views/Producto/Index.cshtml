@@ -190,9 +190,11 @@
 <div class="main-container">
     <img src="~/Img/icono.png" alt="Logo" class="image2-container" class="center-logo" />
 </div>
-<div>
-    <a class="custom-btn" href="@Url.Action("Index", "Home")">Volver</a>
-</div>
-
+@if (!User.Identity!.IsAuthenticated) 
+{
+    <div>
+        <a class="custom-btn" href="@Url.Action("Index", "Home")">Volver</a>
+    </div>
+}
 
 

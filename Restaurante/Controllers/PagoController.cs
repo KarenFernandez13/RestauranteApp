@@ -12,10 +12,12 @@ namespace Restaurante.Controllers
     public class PagoController : Controller
     {
         private readonly RestauranteContext _context;
+        private readonly CurrencyLayerService _currencyLayerService;
 
-        public PagoController(RestauranteContext context)
+        public PagoController(RestauranteContext context, CurrencyLayerService currencyLayerService)
         {
             _context = context;
+            _currencyLayerService = currencyLayerService;
         }
 
         // GET: Pago
@@ -46,33 +48,95 @@ namespace Restaurante.Controllers
             return View(pago);
         }
 
-        // GET: Pago/Create
-        public IActionResult Create()
+        // GET: Pagos/Create
+        public async Task<IActionResult> Create(int? idOrden)
         {
-            ViewData["IdClima"] = new SelectList(_context.Climas, "Id", "Id");
-            ViewData["IdCotizacion"] = new SelectList(_context.Cotizacions, "Id", "Id");
-            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id");
-            return View();
-        }
+            if (idOrden == null)
+            {
+                return NotFound();
+            }
 
-        // POST: Pago/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+            var orden = _context.Orden
+                .Include(o => o.OrdenDetalles)
+                .Include(o => o.IdReservaNavigation)
+                .ThenInclude(r => r.CiClienteNavigation)
+                .FirstOrDefault(o => o.Id == idOrden);
+
+            if (orden == null)
+            {
+                return NotFound();
+            }      
+            
+            var pago = new Pago
+            {
+                Monto = (double)orden.Total,
+                Moneda = "-",
+                Fecha = DateOnly.FromDateTime(DateTime.Today),
+                IdOrden = idOrden,
+                IdOrdenNavigation = orden            
+                                
+            };
+
+            if (pago == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Monedas = new SelectList(new List<string> { "USD", "EUR", "UYU" });
+            ViewBag.Metodos = new SelectList(new List<string> { "Efectivo", "Tarjeta" });
+            ViewBag.IdOrden = idOrden;
+            ViewBag.DocumentoCliente = orden.IdReservaNavigation.CiClienteNavigation.Ci;
+
+            return View(pago);
+        }
+      
+
+        // POST: Pagos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Monto,Moneda,Fecha,Metodo,IdOrden,IdClima,TotalConDescuento,Descuento,IdCotizacion")] Pago pago)
+        public async Task<IActionResult> Create([Bind("Monto,Moneda,Fecha,Metodo,IdOrden")] Pago pago)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pago);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    var montoString = pago.Monto.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    pago.Monto = double.Parse(montoString, System.Globalization.CultureInfo.InvariantCulture);
+
+                    _context.Add(pago);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException dbEx)
+                {
+                    var innerException = dbEx.InnerException?.Message ?? dbEx.Message;
+                    ModelState.AddModelError("", $"Error al convertir el monto: {innerException}");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Error inesperado: {ex.Message}");
+                }
             }
-            ViewData["IdClima"] = new SelectList(_context.Climas, "Id", "Id", pago.IdClima);
-            ViewData["IdCotizacion"] = new SelectList(_context.Cotizacions, "Id", "Id", pago.IdCotizacion);
-            ViewData["IdOrden"] = new SelectList(_context.Orden, "Id", "Id", pago.IdOrden);
+
+            ViewBag.Monedas = new SelectList(new List<string> { "UYU", "USD", "EUR" });
+            ViewBag.Metodos = new SelectList(new List<string> { "Efectivo", "Tarjeta" });
+
             return View(pago);
         }
+
+
+        // Método para obtener el tipo de cambio
+        [HttpGet]
+        public async Task<IActionResult> GetExchangeRates(string moneda)
+        {
+            var rates = await _currencyLayerService.GetExchangeRatesAsync("UYU", new List<string> { "USD", "EUR" });
+            if (rates.TryGetValue(moneda, out var rate))
+            {
+                return Json(rate);
+            }
+            return Json(0);
+        }
+
 
         // GET: Pago/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -94,8 +158,6 @@ namespace Restaurante.Controllers
         }
 
         // POST: Pago/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Monto,Moneda,Fecha,Metodo,IdOrden,IdClima,TotalConDescuento,Descuento,IdCotizacion")] Pago pago)

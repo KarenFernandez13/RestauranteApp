@@ -3,9 +3,28 @@
 @{
     ViewData["Title"] = "Create";
 }
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
-<h4>OrdenDetalle</h4>
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+<br />
+<h3 class="bold-text">~ Agregar productos ~</h3>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" method="post">
@@ -36,20 +55,21 @@
                 <label asp-for="Cantidad" class="control-label"></label>
                 <input asp-for="Cantidad" class="form-control" />
             </div>
+            <br />
             <div class="form-group">
-                <input type="button" value="Agregar Producto" class="btn btn-secondary" id="addProduct" />
+                <input type="button" value="Agregar" class="custom-btn" id="addProduct" />
             </div>
+            <br />
             <div id="productList"></div>
             <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
+                <input type="submit" value="Confirmar" class="custom-btn" />
             </div>
         </form>
     </div>
 </div>
-<hr />
-
+<br />
 <div>
-    <a asp-action="Details" asp-route-id="@ViewBag.IdOrden">Ver Detalles de la Orden</a>
+    <button class="custom-btn" onclick="location.href='@Url.Action("Details", "Orden", new { id = Model.IdOrden })'">Ver orden</button>
 </div>
 
 @section Scripts {
@@ -85,4 +105,5 @@
             });
         });
     </script>
+}
 }

@@ -4,9 +4,11 @@
     ViewData["Title"] = "Detalles de la Orden";
     double totalOrden = 0;
 }
-
-<h3>Orden</h3>
-
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+<h3 class="bold-text">~ Orden </h3>
+<hr />
+<br />
 <div>
     <hr />
     <dl class="row">
@@ -78,3 +80,4 @@
 <div>
     <a asp-action="Index" asp-controller="Producto">Volver</a>
 </div>
+}

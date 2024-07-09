@@ -3,6 +3,22 @@
 @{
     ViewData["Title"] = "Clientes";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
 
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
@@ -46,10 +62,56 @@
             </nav>
         </header>
     </div>
-
-    <h2>Agregar cliente</h2>
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+    <br />
+    <h3 class="bold-text">~ Clientes ~</h3>
+    <hr />
+    <br />
+    <div button-container>
+        <a class="custom-btn " href="@Url.Action("Create", "Cliente")">Ingresar nuevo Cliente</a>
+    </div>
+    <br />
+    <div>
+        <br />
+        <h5>Buscar por documento</h5>
+        <form method="get" action="@Url.Action("Search", "Cliente")" class="form-inline">
+            <div class="form-group">
+                <label for="clienteId">Documento Cliente: </label>
+                <input type="text" name="clienteId" class="form-control" />
+            </div>
+            <br />
+            <button type="submit" class="custom-btn">Buscar</button>
+        </form>
+    </div>
+    <br />
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Documento</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Tipo de cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cliente in Model)
+                {
+                    <tr>
+                        <td>@cliente.Ci</td>
+                        <td>@cliente.Nombre</td>
+                        <td>@cliente.Email</td>
+                        <td>@cliente.TipoCliente</td>                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No hay clientes registrados con ese documento</p>
+    }
 }
+
+
+

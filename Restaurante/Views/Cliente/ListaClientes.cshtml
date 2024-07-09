@@ -3,6 +3,27 @@
 @{
     ViewData["Title"] = "Lista de clientes";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
 
 @if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
 {
@@ -43,5 +64,7 @@
             }
         </tbody>
     </table>
-
+    <div>
+        <a class="custom-btn" href="@Url.Action("Listas", "Listas")">Volver</a>
+    </div>
 }

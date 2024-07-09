@@ -1,13 +1,35 @@
 ﻿@model Restaurante.Models.Rol
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar rol";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
-<h1>Edit</h1>
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
 
-<h4>Rol</h4>
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+<br />
+<h3 class="bold-text">~ Modificar rol ~</h3>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -17,18 +39,19 @@
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
+                </div><br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Guardar" class="custom-btn" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <br />
+    <div>
+        <a class="custom-btn" href="@Url.Action("Index", "Rol")">Volver</a>
+    </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 }

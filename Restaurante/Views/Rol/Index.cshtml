@@ -1,14 +1,39 @@
 ﻿@model IEnumerable<Restaurante.Models.Rol>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Roles";
 }
+<style>
+    body {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
 
-<h1>Index</h1>
+    .centered-text {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .date-input {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+@if (User.Identity!.IsAuthenticated) // sirve para bloquear ver los elementos si no estas registrado
+{
+<br />
+<h3 class="bold-text">~ Roles ~</h3>
+<hr />
+<br />
+<div class="text-center">
+    <a href="@Url.Action("Create", "Rol")" class="custom-btn">Crear rol</a>
+</div>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -33,3 +58,9 @@
 }
     </tbody>
 </table>
+    <br />
+    <hr />
+    <div>
+        <a class="custom-btn" href="@Url.Action("Listas", "Listas")">Volver</a>
+    </div>
+}
